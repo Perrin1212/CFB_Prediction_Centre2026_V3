@@ -1,0 +1,11 @@
+CFB V3.1.1 PIPELINE HOTFIX
+==========================
+
+Extract this archive over the existing CFB_Prediction_Centre2026_V3_FINAL
+folder with -Force. It allows the structural V3 pipeline to continue when the
+optional frozen V2 control artifacts are absent, and refreshes app final scores
+directly from the authoritative V3 CFBD schedule.
+
+After extraction run:
+
+python -m jobs.run_pipeline --refresh-current --rebuild-history

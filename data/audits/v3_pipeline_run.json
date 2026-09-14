@@ -1,0 +1,17 @@
+{
+  "started_at_utc": "2026-09-14T12:29:57.838012+00:00",
+  "completed_at_utc": "2026-09-14T12:34:42.986648+00:00",
+  "refresh_current": true,
+  "rebuild_history": false,
+  "simulations_per_game": 50000,
+  "steps": [
+    "market_capture_attempted",
+    "v2_control_unavailable",
+    "v3_acquisition",
+    "canonical_current_refresh",
+    "v3_predictions",
+    "v3_app_overlay",
+    "v3_tracker",
+    "v3_betting"
+  ]
+}

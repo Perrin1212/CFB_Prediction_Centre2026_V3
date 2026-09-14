@@ -1,0 +1,15 @@
+{
+  "generated_at_utc": "2026-09-14T12:33:30.817299+00:00",
+  "simulations_per_new_game": 50000,
+  "locked_predictions": 86,
+  "new_forward_predictions": 703,
+  "published_predictions": 789,
+  "production_training_games": 4546,
+  "production_training_seasons": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ]
+}

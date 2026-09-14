@@ -1,0 +1,139 @@
+{
+  "seasons": {
+    "2021": {
+      "games": 887,
+      "plays": 158498,
+      "team_game_stats": 887,
+      "advanced": 0,
+      "weeks_with_data": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "week_zero_skipped": true
+    },
+    "2022": {
+      "games": 896,
+      "plays": 160282,
+      "team_game_stats": 896,
+      "advanced": 0,
+      "weeks_with_data": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "week_zero_skipped": true
+    },
+    "2023": {
+      "games": 910,
+      "plays": 158995,
+      "team_game_stats": 910,
+      "advanced": 0,
+      "weeks_with_data": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "week_zero_skipped": true
+    },
+    "2024": {
+      "games": 920,
+      "plays": 162751,
+      "team_game_stats": 919,
+      "advanced": 0,
+      "weeks_with_data": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "week_zero_skipped": true
+    },
+    "2025": {
+      "games": 934,
+      "plays": 166236,
+      "team_game_stats": 934,
+      "advanced": 0,
+      "weeks_with_data": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "week_zero_skipped": true
+    },
+    "2026": {
+      "games": 888,
+      "plays": 32425,
+      "team_game_stats": 185,
+      "advanced": 0,
+      "weeks_with_data": [
+        1,
+        2
+      ],
+      "week_zero_skipped": false
+    }
+  },
+  "advanced_requested": false,
+  "new_api_calls": 5
+}

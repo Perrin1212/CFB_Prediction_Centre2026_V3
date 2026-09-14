@@ -1,0 +1,15 @@
+{
+  "train_games": 3612,
+  "holdout_games": 934,
+  "winner_accuracy": 0.7408993576017131,
+  "brier": 0.16835180150716658,
+  "log_loss": 0.5029035784372372,
+  "home_mae": 10.286947999910973,
+  "away_mae": 8.55565722177702,
+  "margin_mae": 13.613281684001505,
+  "total_mae": 13.141121239771243,
+  "point_prediction_40_plus_rate": 0.06209850107066381,
+  "actual_40_plus_rate": 0.19004282655246252,
+  "point_prediction_10_or_less_rate": 0.0417558886509636,
+  "actual_10_or_less_rate": 0.16220556745182013
+}

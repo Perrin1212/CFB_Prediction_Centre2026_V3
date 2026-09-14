@@ -1,0 +1,25 @@
+{
+  "mode": "frozen_history_plus_current_refresh",
+  "games": 5435,
+  "live_season_games": 888,
+  "live_season_completed_games": 185,
+  "live_season_pbp_games": 185,
+  "live_season_clean_pbp_games": 184,
+  "live_season_result_only_games": 1,
+  "plays": 32425,
+  "current_cached_week_files": 17,
+  "drives_raw": 113291,
+  "drives_clean": 112657,
+  "team_games_raw": 9461,
+  "team_games_clean": 9410,
+  "training_rows": 4546,
+  "completed_game_counts": {
+    "2021": 887,
+    "2022": 896,
+    "2023": 910,
+    "2024": 919,
+    "2025": 934,
+    "2026": 185
+  },
+  "duplicate_game_ids": 0
+}

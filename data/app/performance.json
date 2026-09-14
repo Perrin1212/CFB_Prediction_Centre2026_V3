@@ -1,0 +1,25 @@
+{
+  "generated_at_utc": "2026-09-08T14:08:39Z",
+  "official_locked": {
+    "label": "Official locked",
+    "games": 79,
+    "accuracy": 0.8734177215189873,
+    "brier": 0.11350071290392452,
+    "record": "69-10"
+  },
+  "historical_reconstruction": {
+    "label": "2026 reconstruction",
+    "games": 99,
+    "accuracy": 0.8585858585858586,
+    "brier": 0.13112238472767485,
+    "record": "85-14"
+  },
+  "all_completed": {
+    "label": "All completed",
+    "games": 99,
+    "accuracy": 0.8585858585858586,
+    "brier": 0.13112238472767485,
+    "record": "85-14"
+  },
+  "note": "Historical reconstruction is diagnostic and must not be presented as genuine live/locked model performance."
+}

@@ -1,0 +1,13 @@
+{
+  "generated_at_utc": "2026-09-14T12:29:59.145879+00:00",
+  "season": 2026,
+  "current_games": 405,
+  "history_rows": 1152,
+  "moneyline_games_current": 336,
+  "spread_games_current": 405,
+  "pregame_games_current": 115,
+  "historical_backfill_games_current": 290,
+  "source": "CollegeFootballData /lines",
+  "current_file": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V3_FINAL\\data\\market\\market_lines_current.csv",
+  "history_file": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V3_FINAL\\data\\market\\market_lines_history.csv"
+}

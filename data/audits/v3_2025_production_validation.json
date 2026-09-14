@@ -1,0 +1,21 @@
+{
+  "games": 934,
+  "simulations_per_game": 5000,
+  "winner_accuracy": 0.7408993576017131,
+  "brier": 0.16835180150716655,
+  "log_loss": 0.5029035784372373,
+  "model_only_brier": 0.16835180150716655,
+  "simulation_only_brier": 0.17644124548180087,
+  "home_mae": 10.274304519232754,
+  "away_mae": 8.566820359015557,
+  "margin_mae": 13.608243726314422,
+  "total_mae": 13.137500204374117,
+  "simulated_40_plus_rate": 0.1804735546038544,
+  "actual_40_plus_rate": 0.19004282655246252,
+  "simulated_10_or_less_rate": 0.16293779443254816,
+  "actual_10_or_less_rate": 0.16220556745182013,
+  "home_80_interval_coverage": 0.7665952890792291,
+  "away_80_interval_coverage": 0.8179871520342612,
+  "margin_80_interval_coverage": 0.7301927194860813,
+  "total_80_interval_coverage": 0.8201284796573876
+}

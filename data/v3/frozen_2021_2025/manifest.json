@@ -1,0 +1,21 @@
+{
+  "freeze_schema_version": 2,
+  "years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "universe": [
+    "FBS_vs_FBS",
+    "FBS_vs_FCS"
+  ],
+  "eligible_historical_games": 2880,
+  "fbs_vs_fbs": 2409,
+  "fbs_vs_fcs": 471,
+  "games_without_complete_drive_pairs": 124,
+  "training_games": 2756,
+  "historical_drives": 65278,
+  "historical_team_games": 5514
+}

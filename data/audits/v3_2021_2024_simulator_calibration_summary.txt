@@ -1,0 +1,14 @@
+V3 2021-2024 SIMULATOR CALIBRATION
+============================================================
+Games: 3,612
+Team observations: 7,224
+Simulations/game: 1,000
+
+Actual mean points: 27.2003
+Simulator mean points: 26.6721
+Actual 40+ rate: 0.202519
+Expected 40+ rate: 0.159930
+Actual <=10 rate: 0.136213
+Expected <=10 rate: 0.113533
+40+ Brier: 0.146147
+<=10 Brier: 0.109269

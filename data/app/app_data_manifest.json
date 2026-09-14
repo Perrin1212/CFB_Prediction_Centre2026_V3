@@ -1,0 +1,21 @@
+{
+  "generated_at_utc": "2026-09-08T14:08:39Z",
+  "app_data_version": "v2_app_data_5_team_profiles_market",
+  "games": 888,
+  "official_locks": 79,
+  "weekly_elo_rows": 414,
+  "elo_rankings_rows": 138,
+  "fbs_team_rows": 138,
+  "market_rows": 275,
+  "weekly_elo_source": "2026 completed-game chronology with next-pregame postgame inference",
+  "weekly_elo_home_column": "home_pregame_elo",
+  "weekly_elo_away_column": "away_pregame_elo",
+  "files": {
+    "games": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V2\\data\\app\\games.csv",
+    "elo_weekly": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V2\\data\\app\\elo_weekly.csv",
+    "elo_rankings_current": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V2\\data\\app\\elo_rankings_current.csv",
+    "teams": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V2\\data\\app\\teams.csv",
+    "team_profiles": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V2\\data\\app\\team_profiles.csv",
+    "performance": "C:\\Users\\Tom\\Desktop\\CFB_Prediction_Centre2026_V2\\data\\app\\performance.json"
+  }
+}

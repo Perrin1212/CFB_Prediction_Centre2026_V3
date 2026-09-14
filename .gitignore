@@ -1,0 +1,66 @@
+# ============================================================
+# CFB Prediction Centre 2026 V3 FINAL
+# ============================================================
+
+# Virtual environments
+.venv/
+.venv-1/
+venv/
+env/
+
+# Secrets / API keys
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing / tooling
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Debug / audit
+*.log
+forward_engine_logic.txt
+forward_engine_logic_2.txt
+scoring_interface_audit.txt
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================================
+# GENERATED MODEL DATA
+# ============================================================
+
+data/raw/
+data/processed/
+data/predictions/
+
+# ============================================================
+# APP DATA
+# Keep these - Streamlit needs them
+# ============================================================
+
+!data/
+!data/app/
+!data/app/**

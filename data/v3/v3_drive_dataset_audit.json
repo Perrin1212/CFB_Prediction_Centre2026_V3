@@ -1,0 +1,33 @@
+{
+  "freeze_schema_version": 2,
+  "historical": {
+    "freeze_schema_version": 2,
+    "years": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "universe": [
+      "FBS_vs_FBS",
+      "FBS_vs_FCS"
+    ],
+    "eligible_historical_games": 2880,
+    "fbs_vs_fbs": 2409,
+    "fbs_vs_fcs": 471,
+    "games_without_complete_drive_pairs": 124,
+    "training_games": 2756,
+    "historical_drives": 65278,
+    "historical_team_games": 5514
+  },
+  "current": {
+    "current_games": 185,
+    "unclassified_or_excluded_current_games": 0
+  },
+  "combined_drives": 69647,
+  "combined_team_games": 5884,
+  "historical_training_games": 2756,
+  "current_drives": 4369,
+  "current_team_games": 370
+}
