@@ -83,6 +83,8 @@ def main() -> None:
     run("jobs.build_v3_app_overlay")
     run("jobs.build_v3_tracker")
     run("jobs.build_v3_betting_performance")
+    run("jobs.build_v3_elo_app")
+    run("jobs.build_v3_team_profiles")
     completed_steps.extend(["v3_predictions", "v3_app_overlay", "v3_tracker", "v3_betting"])
     manifest = {
         "started_at_utc": started.isoformat(),

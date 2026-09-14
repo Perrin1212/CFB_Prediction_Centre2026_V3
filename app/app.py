@@ -33,6 +33,7 @@ PERFORMANCE_PATH = APP_DATA_DIR / "performance.json"
 BETTING_PATH = APP_DATA_DIR / "betting_performance.csv"
 V3_BETTING_PATH = APP_DATA_DIR / "v3_betting_performance.csv"
 TEAM_PROFILES_PATH = APP_DATA_DIR / "team_profiles.csv"
+V3_TEAM_PROFILES_PATH = APP_DATA_DIR / "v3_team_profiles.csv"
 
 
 # ============================================================
@@ -1078,7 +1079,7 @@ def load_data():
             rankings = fbs[pd.to_numeric(fbs["week"], errors="coerce").eq(latest_week)].sort_values("elo", ascending=False).copy()
             rankings["rank"] = rankings["elo"].rank(method="min", ascending=False).astype(int)
     betting = safe_read_csv(V3_BETTING_PATH if V3_BETTING_PATH.exists() and V3_BETTING_PATH.stat().st_size > 0 else BETTING_PATH)
-    profiles = safe_read_csv(TEAM_PROFILES_PATH)
+    profiles = safe_read_csv(V3_TEAM_PROFILES_PATH if V3_TEAM_PROFILES_PATH.exists() and V3_TEAM_PROFILES_PATH.stat().st_size > 0 else TEAM_PROFILES_PATH)
 
     performance: dict[str, Any] = {}
     if PERFORMANCE_PATH.exists() and PERFORMANCE_PATH.stat().st_size > 0:
