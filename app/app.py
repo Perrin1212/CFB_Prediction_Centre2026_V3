@@ -1067,6 +1067,16 @@ def load_data():
     games = safe_read_csv(games_source)
     weekly = safe_read_csv(V3_ELO_WEEKLY_PATH if V3_ELO_WEEKLY_PATH.exists() and V3_ELO_WEEKLY_PATH.stat().st_size > 0 else ELO_WEEKLY_PATH)
     rankings = safe_read_csv(ELO_RANKINGS_PATH)
+    # V3 ELO is authoritative; derive the current FBS leaderboard from the
+    # same V3 weekly export used by the team pages.
+    if not weekly.empty and "elo" in weekly.columns and "team" in weekly.columns:
+        w = weekly.copy()
+        w["classification"] = w.get("classification", w.get("team_classification", "fbs"))
+        fbs = w[w["classification"].astype(str).str.casefold().eq("fbs")].copy()
+        if not fbs.empty:
+            latest_week = pd.to_numeric(fbs["week"], errors="coerce").max()
+            rankings = fbs[pd.to_numeric(fbs["week"], errors="coerce").eq(latest_week)].sort_values("elo", ascending=False).copy()
+            rankings["rank"] = rankings["elo"].rank(method="min", ascending=False).astype(int)
     betting = safe_read_csv(V3_BETTING_PATH if V3_BETTING_PATH.exists() and V3_BETTING_PATH.stat().st_size > 0 else BETTING_PATH)
     profiles = safe_read_csv(TEAM_PROFILES_PATH)
 
@@ -3941,7 +3951,13 @@ def render_exact_team(games: pd.DataFrame, weekly: pd.DataFrame, profiles: pd.Da
         sample=team_games.iloc[0];logo=clean(sample.get("home_logo_url" if clean(sample.get("home_team"))==team else "away_logo_url",""))
     sample=team_games.iloc[0] if not team_games.empty else pd.Series(dtype=object);side="home" if not sample.empty and clean(sample.get("home_team"))==team else "away";colour=team_colour(sample,side,"#1c9bd1") if not sample.empty else "#1c9bd1"
     rank=profile_value(profile,["model_rank"],latest.get("rank",np.nan));elo=profile_value(profile,["current_elo"],latest.get("elo",np.nan));record=live_team_record(team, games);delta=profile_value(profile,["recent_elo_change"],latest.get("elo_change",np.nan));conference=clean(profile.get("conference",latest.get("conference","")))
-    upcoming=team_games[~first_text(team_games,["game_status"]).str.lower().eq("completed")];next_game=upcoming.iloc[0] if not upcoming.empty else pd.Series(dtype=object);opponent=clean(next_game.get("away_team" if clean(next_game.get("home_team"))==team else "home_team","")) if not next_game.empty else "TBD"
+    # Upcoming means no authoritative final score, not merely a particular
+    # status label (V3 uses both `final` and `completed` across exports).
+    ah = pd.to_numeric(team_games.get("actual_home_points"), errors="coerce")
+    aa = pd.to_numeric(team_games.get("actual_away_points"), errors="coerce")
+    upcoming = team_games[ah.isna() | aa.isna()].sort_values("start_date_utc", kind="stable")
+    next_game = upcoming.iloc[0] if not upcoming.empty else pd.Series(dtype=object)
+    opponent = clean(next_game.get("away_team" if clean(next_game.get("home_team")) == team else "home_team", "")) if not next_game.empty else "TBD"
     st.markdown(f'<section class="x-team-hero" style="--team:{colour};--team-soft:{colour}77"><div class="x-team-hero-grid">{exact_logo(logo,team)}<div><div class=x-eyebrow>{html.escape(conference or "TEAM INTELLIGENCE")}</div><div class=x-team-name>{html.escape(team.upper())}</div><div class=x-sub>Production strength · form · matchup identity</div></div><div class=x-team-kpis><div class=x-team-kpi><span>Record</span><strong>{html.escape(record)}</strong></div><div class=x-team-kpi><span>ELO rank</span><strong>#{num(rank,0)}</strong></div><div class=x-team-kpi><span>ELO trend</span><strong style="color:#48e09b">{signed(delta,0)}</strong></div><div class=x-team-kpi><span>Next game</span><strong style="font-size:.72rem">vs {html.escape(opponent)}</strong></div></div></div></section>',unsafe_allow_html=True)
     tabs=[("overview","Overview"),("schedule","Schedule"),("offense","Offense"),("defense","Defense"),("drives","Drives"),("trends","Trends")];tab=query_value("tab","overview");tab=tab if tab in dict(tabs) else "overview";exact_tabs("team",tabs,tab,team=team)
     metric_defs=[("Offensive Rating",profile.get("offensive_rating"),"#4"),("Defensive Rating",profile.get("defensive_rating"),"#7"),("Success Rate",profile.get("success_rate"),"Efficiency"),("Explosive Rate",profile.get("explosive_rate"),"Big plays"),("Turnover Margin",profile.get("turnover_margin"),"Possessions"),("Strength of Schedule",profile.get("schedule_strength_rank"),clean(profile.get("schedule_strength_label",""))),("Recent Form",record,"2026")]
