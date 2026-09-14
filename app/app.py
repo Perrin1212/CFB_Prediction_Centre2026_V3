@@ -27,6 +27,7 @@ GAMES_PATH = APP_DATA_DIR / "games.csv"
 GAMES_V3_PATH = APP_DATA_DIR / "games_v3.csv"
 V3_TRACKER_PATH = APP_DATA_DIR / "v3_tracker.csv"
 ELO_WEEKLY_PATH = APP_DATA_DIR / "elo_weekly.csv"
+V3_ELO_WEEKLY_PATH = APP_DATA_DIR / "v3_elo_weekly.csv"
 ELO_RANKINGS_PATH = APP_DATA_DIR / "elo_rankings_current.csv"
 PERFORMANCE_PATH = APP_DATA_DIR / "performance.json"
 BETTING_PATH = APP_DATA_DIR / "betting_performance.csv"
@@ -1064,7 +1065,7 @@ def safe_read_csv(path: Path) -> pd.DataFrame:
 def load_data():
     games_source = V3_TRACKER_PATH if V3_TRACKER_PATH.exists() and V3_TRACKER_PATH.stat().st_size > 0 else (GAMES_V3_PATH if GAMES_V3_PATH.exists() and GAMES_V3_PATH.stat().st_size > 0 else GAMES_PATH)
     games = safe_read_csv(games_source)
-    weekly = safe_read_csv(ELO_WEEKLY_PATH)
+    weekly = safe_read_csv(V3_ELO_WEEKLY_PATH if V3_ELO_WEEKLY_PATH.exists() and V3_ELO_WEEKLY_PATH.stat().st_size > 0 else ELO_WEEKLY_PATH)
     rankings = safe_read_csv(ELO_RANKINGS_PATH)
     betting = safe_read_csv(V3_BETTING_PATH if V3_BETTING_PATH.exists() and V3_BETTING_PATH.stat().st_size > 0 else BETTING_PATH)
     profiles = safe_read_csv(TEAM_PROFILES_PATH)

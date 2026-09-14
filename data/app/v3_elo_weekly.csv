@@ -1,0 +1,201 @@
+team,season,week,week_label,elo,previous_elo,elo_change,rank,previous_rank,rank_change,opponent,venue,result,classification,game_id
+North Carolina,2026,1,Week 1,1398.0,1380.0,18.0,71.0,78.0,7.0,TCU,away,W,fbs,401856766
+TCU,2026,1,Week 1,1595.0,1613.0,-18.0,30.0,27.0,-3.0,North Carolina,home,L,fbs,401856766
+San José State,2026,1,Week 1,1406.0,1411.0,-5.0,69.0,69.0,0.0,USC,away,L,fbs,401864494
+USC,2026,1,Week 1,1752.0,1747.0,5.0,16.0,13.0,-3.0,San José State,home,W,fbs,401864494
+NC State,2026,1,Week 1,1506.0,1570.0,-64.0,52.0,34.0,-18.0,Virginia,away,L,fbs,401858202
+Virginia,2026,1,Week 1,1655.0,1591.0,64.0,26.0,30.0,4.0,NC State,home,W,fbs,401858202
+Jacksonville State,2026,1,Week 1,1428.0,1494.0,-66.0,63.0,57.0,-6.0,North Dakota State,away,L,fbs,401864577
+North Dakota State,2026,1,Week 1,1566.0,1500.0,66.0,38.0,54.0,16.0,Jacksonville State,home,W,fbs,401864577
+Eastern Michigan,2026,1,Week 1,1360.0,1326.0,34.0,77.0,86.0,9.0,Sacramento State,home,W,fbs,401866408
+Sacramento State,2026,1,Week 1,1466.0,1500.0,-34.0,57.0,54.0,-3.0,Eastern Michigan,away,L,fbs,401866408
+Hawai'i,2026,1,Week 1,1449.0,1472.0,-23.0,59.0,62.0,3.0,Stanford,away,L,fbs,401858201
+Stanford,2026,1,Week 1,1413.0,1390.0,23.0,66.0,74.0,8.0,Hawai'i,home,W,fbs,401858201
+Florida State,2026,1,Week 1,1551.0,1537.0,14.0,44.0,46.0,2.0,New Mexico State,home,W,fbs,401864570
+New Mexico State,2026,1,Week 1,1267.0,1281.0,-14.0,89.0,90.0,1.0,Florida State,away,L,fbs,401864570
+Memphis,2026,1,Week 1,1541.0,1526.0,15.0,45.0,49.0,4.0,UNLV,away,W,fbs,401862693
+UNLV,2026,1,Week 1,1566.0,1581.0,-15.0,38.0,31.0,-7.0,Memphis,home,L,fbs,401862693
+Massachusetts,2026,1,Week 1,1076.0,978.0,98.0,99.0,101.0,2.0,Rutgers,away,W,fbs,401858423
+Rutgers,2026,1,Week 1,1381.0,1479.0,-98.0,74.0,59.0,-15.0,Massachusetts,home,L,fbs,401858423
+Akron,2026,1,Week 1,929.0,925.0,4.0,102.0,102.0,0.0,Wake Forest,away,L,fbs,401858204
+Wake Forest,2026,1,Week 1,1516.0,1520.0,-4.0,49.0,50.0,1.0,Akron,home,W,fbs,401858204
+Colorado,2026,1,Week 1,1406.0,1396.0,10.0,69.0,73.0,4.0,Georgia Tech,away,W,fbs,401856776
+Georgia Tech,2026,1,Week 1,1553.0,1563.0,-10.0,43.0,37.0,-6.0,Colorado,home,L,fbs,401856776
+Illinois,2026,1,Week 1,1595.0,1563.0,32.0,30.0,37.0,7.0,UAB,home,W,fbs,401858424
+UAB,2026,1,Week 1,1411.0,1443.0,-32.0,68.0,64.0,-4.0,Illinois,away,L,fbs,401858424
+Eastern Michigan,2026,1,Week 1,1353.0,1360.0,-7.0,79.0,83.0,4.0,San José State,home,L,fbs,401864495
+San José State,2026,1,Week 1,1413.0,1406.0,7.0,66.0,70.0,4.0,Eastern Michigan,away,W,fbs,401864495
+Oklahoma,2026,1,Week 1,1799.0,1706.0,93.0,13.0,17.0,4.0,UTEP,home,W,fbs,401856664
+UTEP,2026,1,Week 1,1163.0,1256.0,-93.0,97.0,94.0,-3.0,Oklahoma,away,L,fbs,401856664
+Michigan State,2026,1,Week 1,1468.0,1439.0,29.0,56.0,65.0,9.0,Toledo,home,W,fbs,401858429
+Toledo,2026,1,Week 1,1568.0,1597.0,-29.0,37.0,29.0,-8.0,Michigan State,away,L,fbs,401858429
+Miami,2026,1,Week 1,1901.0,1842.0,59.0,5.0,5.0,0.0,Stanford,away,W,fbs,401858206
+Stanford,2026,1,Week 1,1354.0,1413.0,-59.0,78.0,68.0,-10.0,Miami,home,L,fbs,401858206
+Fresno State,2026,1,Week 1,1449.0,1532.0,-83.0,59.0,47.0,-12.0,USC,away,L,fbs,401858436
+USC,2026,1,Week 1,1835.0,1752.0,83.0,11.0,11.0,0.0,Fresno State,home,W,fbs,401858436
+Alabama,2026,1,Week 1,1823.0,1738.0,85.0,12.0,15.0,3.0,East Carolina,home,W,fbs,401856634
+East Carolina,2026,1,Week 1,1477.0,1562.0,-85.0,54.0,39.0,-15.0,Alabama,away,L,fbs,401856634
+Houston,2026,1,Week 1,1514.0,1508.0,6.0,51.0,51.0,0.0,Oregon State,home,W,fbs,401856778
+Oregon State,2026,1,Week 1,1260.0,1266.0,-6.0,91.0,93.0,2.0,Houston,away,L,fbs,401856778
+Coastal Carolina,2026,1,Week 1,1270.0,1275.0,-5.0,87.0,91.0,4.0,West Virginia,away,L,fbs,401856780
+West Virginia,2026,1,Week 1,1365.0,1360.0,5.0,76.0,83.0,7.0,Coastal Carolina,home,W,fbs,401856780
+Indiana,2026,1,Week 1,2113.0,2064.0,49.0,1.0,1.0,0.0,North Texas,home,W,fbs,401858425
+North Texas,2026,1,Week 1,1590.0,1639.0,-49.0,33.0,23.0,-10.0,Indiana,away,L,fbs,401858425
+Nebraska,2026,1,Week 1,1592.0,1538.0,54.0,32.0,45.0,13.0,Ohio,home,W,fbs,401858430
+Ohio,2026,1,Week 1,1318.0,1372.0,-54.0,84.0,80.0,-4.0,Nebraska,away,L,fbs,401858430
+James Madison,2026,1,Week 1,1776.0,1770.0,6.0,14.0,10.0,-4.0,Liberty,home,W,fbs,401869960
+Liberty,2026,1,Week 1,1697.0,1703.0,-6.0,20.0,18.0,-2.0,James Madison,away,L,fbs,401869960
+Miami (OH),2026,1,Week 1,1259.0,1364.0,-105.0,92.0,81.0,-11.0,Pittsburgh,away,L,fbs,401858207
+Pittsburgh,2026,1,Week 1,1681.0,1576.0,105.0,22.0,33.0,11.0,Miami (OH),home,W,fbs,401858207
+Ball State,2026,1,Week 1,1112.0,1173.0,-61.0,98.0,98.0,0.0,Ohio State,away,L,fbs,401858432
+Ohio State,2026,1,Week 1,1986.0,1925.0,61.0,3.0,3.0,0.0,Ball State,home,W,fbs,401858432
+Kent State,2026,1,Week 1,1056.0,1167.0,-111.0,101.0,99.0,-2.0,South Carolina,away,L,fbs,401856665
+South Carolina,2026,1,Week 1,1742.0,1631.0,111.0,18.0,24.0,6.0,Kent State,home,W,fbs,401856665
+Auburn,2026,1,Week 1,1613.0,1613.0,0.0,27.0,27.0,0.0,Baylor,home,W,fbs,401856636
+Baylor,2026,1,Week 1,1506.0,1506.0,0.0,52.0,52.0,0.0,Auburn,away,L,fbs,401856636
+Texas,2026,1,Week 1,1913.0,1784.0,129.0,4.0,9.0,5.0,Texas State,home,W,fbs,401856667
+Texas State,2026,1,Week 1,1441.0,1570.0,-129.0,61.0,34.0,-27.0,Texas,away,L,fbs,401856667
+Boston College,2026,1,Week 1,1370.0,1406.0,-36.0,75.0,70.0,-5.0,Cincinnati,away,L,fbs,401856777
+Cincinnati,2026,1,Week 1,1516.0,1480.0,36.0,49.0,58.0,9.0,Boston College,home,W,fbs,401856777
+Duke,2026,1,Week 1,1607.0,1581.0,26.0,28.0,31.0,3.0,Tulane,home,W,fbs,401858209
+Tulane,2026,1,Week 1,1529.0,1555.0,-26.0,48.0,42.0,-6.0,Duke,away,L,fbs,401858209
+Boise State,2026,1,Week 1,1569.0,1562.0,7.0,36.0,39.0,3.0,Oregon,away,L,fbs,401858433
+Oregon,2026,1,Week 1,1873.0,1880.0,-7.0,7.0,4.0,-3.0,Boise State,home,W,fbs,401858433
+Marshall,2026,1,Week 1,1389.0,1478.0,-89.0,72.0,60.0,-12.0,Penn State,away,L,fbs,401858434
+Penn State,2026,1,Week 1,1891.0,1802.0,89.0,6.0,7.0,1.0,Marshall,home,W,fbs,401858434
+Oklahoma State,2026,1,Week 1,1212.0,1240.0,-28.0,94.0,95.0,1.0,Tulsa,away,L,fbs,401856772
+Tulsa,2026,1,Week 1,1268.0,1240.0,28.0,88.0,95.0,7.0,Oklahoma State,home,W,fbs,401856772
+Iowa,2026,1,Week 1,1847.0,1791.0,56.0,9.0,8.0,-1.0,Northern Illinois,home,W,fbs,401858426
+Northern Illinois,2026,1,Week 1,1266.0,1322.0,-56.0,90.0,87.0,-3.0,Iowa,away,L,fbs,401858426
+Colorado State,2026,1,Week 1,1336.0,1273.0,63.0,82.0,92.0,10.0,Wyoming,home,W,fbs,401860878
+Wyoming,2026,1,Week 1,1300.0,1363.0,-63.0,85.0,82.0,-3.0,Colorado State,away,L,fbs,401860878
+Missouri State,2026,1,Week 1,1284.0,1385.0,-101.0,86.0,75.0,-11.0,Texas A&M,away,L,fbs,401856668
+Texas A&M,2026,1,Week 1,1849.0,1748.0,101.0,8.0,12.0,4.0,Missouri State,home,W,fbs,401856668
+Arkansas State,2026,1,Week 1,1353.0,1378.0,-25.0,79.0,79.0,0.0,Memphis,away,L,fbs,401862695
+Memphis,2026,1,Week 1,1566.0,1541.0,25.0,38.0,44.0,6.0,Arkansas State,home,W,fbs,401862695
+Florida International,2026,1,Week 1,1385.0,1382.0,3.0,73.0,76.0,3.0,South Florida,away,L,fbs,401862699
+South Florida,2026,1,Week 1,1679.0,1682.0,-3.0,23.0,20.0,-3.0,Florida International,home,W,fbs,401862699
+Sam Houston,2026,1,Week 1,1164.0,1162.0,2.0,96.0,100.0,4.0,Troy,away,L,fbs,401870763
+Troy,2026,1,Week 1,1420.0,1422.0,-2.0,65.0,67.0,2.0,Sam Houston,home,W,fbs,401870763
+Clemson,2026,1,Week 1,1541.0,1670.0,-129.0,45.0,21.0,-24.0,LSU,away,L,fbs,401856660
+LSU,2026,1,Week 1,1745.0,1616.0,129.0,17.0,26.0,9.0,Clemson,home,W,fbs,401856660
+Mississippi State,2026,1,Week 1,1584.0,1478.0,106.0,35.0,60.0,25.0,UL Monroe,home,W,fbs,401856662
+UL Monroe,2026,1,Week 1,1071.0,1177.0,-106.0,100.0,97.0,-3.0,Mississippi State,away,L,fbs,401856662
+Michigan,2026,1,Week 1,1686.0,1690.0,-4.0,21.0,19.0,-2.0,Western Michigan,home,W,fbs,401858428
+Western Michigan,2026,1,Week 1,1534.0,1530.0,4.0,47.0,48.0,1.0,Michigan,away,L,fbs,401858428
+Florida,2026,1,Week 1,1658.0,1562.0,96.0,25.0,39.0,14.0,Florida Atlantic,home,W,fbs,401856637
+Florida Atlantic,2026,1,Week 1,1189.0,1285.0,-96.0,95.0,89.0,-6.0,Florida,away,L,fbs,401856637
+Hawai'i,2026,1,Week 1,1426.0,1449.0,-23.0,64.0,63.0,-1.0,UNLV,home,L,fbs,401864497
+UNLV,2026,1,Week 1,1589.0,1566.0,23.0,34.0,36.0,2.0,Hawai'i,away,W,fbs,401864497
+Central Michigan,2026,1,Week 1,1259.0,1321.0,-62.0,92.0,88.0,-4.0,New Mexico,away,L,fbs,401864498
+New Mexico,2026,1,Week 1,1558.0,1496.0,62.0,41.0,56.0,15.0,Central Michigan,home,W,fbs,401864498
+California,2026,1,Week 1,1349.0,1406.0,-57.0,81.0,70.0,-11.0,UCLA,home,L,fbs,401858210
+UCLA,2026,1,Week 1,1438.0,1381.0,57.0,62.0,77.0,15.0,California,away,W,fbs,401858210
+Nevada,2026,1,Week 1,1462.0,1351.0,111.0,58.0,85.0,27.0,Western Kentucky,home,W,fbs,401864432
+Western Kentucky,2026,1,Week 1,1327.0,1438.0,-111.0,83.0,66.0,-17.0,Nevada,away,L,fbs,401864432
+Washington,2026,1,Week 1,1762.0,1744.0,18.0,15.0,14.0,-1.0,Washington State,home,W,fbs,401858437
+Washington State,2026,1,Week 1,1601.0,1619.0,-18.0,29.0,25.0,-4.0,Washington,away,L,fbs,401858437
+Louisville,2026,1,Week 1,1668.0,1666.0,2.0,24.0,22.0,-2.0,Ole Miss,away,L,fbs,401856661
+Ole Miss,2026,1,Week 1,1837.0,1839.0,-2.0,10.0,6.0,-4.0,Louisville,home,W,fbs,401856661
+Notre Dame,2026,1,Week 1,2021.0,1995.0,26.0,2.0,2.0,0.0,Wisconsin,home,W,fbs,401858438
+Wisconsin,2026,1,Week 1,1475.0,1501.0,-26.0,55.0,53.0,-2.0,Notre Dame,away,L,fbs,401858438
+Florida State,2026,1,Week 1,1557.0,1551.0,6.0,42.0,43.0,1.0,SMU,home,L,fbs,401858212
+SMU,2026,1,Week 1,1728.0,1734.0,-6.0,19.0,16.0,-3.0,Florida State,away,W,fbs,401858212
+Boston College,2026,2,Week 2,1380.0,1370.0,10.0,71.0,75.0,4.0,Rutgers,home,W,fbs,401858214
+Rutgers,2026,2,Week 2,1371.0,1381.0,-10.0,72.0,71.0,-1.0,Boston College,away,L,fbs,401858214
+Kansas,2026,2,Week 2,1485.0,1510.0,-25.0,50.0,48.0,-2.0,Missouri,home,L,fbs,401856678
+Missouri,2026,2,Week 2,1691.0,1666.0,25.0,22.0,22.0,0.0,Kansas,away,W,fbs,401856678
+Michigan,2026,2,Week 2,1702.0,1686.0,16.0,20.0,19.0,-1.0,Oklahoma,home,W,fbs,401856679
+Oklahoma,2026,2,Week 2,1783.0,1799.0,-16.0,15.0,14.0,-1.0,Michigan,away,L,fbs,401856679
+Arizona State,2026,2,Week 2,1531.0,1572.0,-41.0,38.0,35.0,-3.0,Texas A&M,away,L,fbs,401856683
+Texas A&M,2026,2,Week 2,1890.0,1849.0,41.0,5.0,8.0,3.0,Arizona State,home,W,fbs,401856683
+Kansas State,2026,2,Week 2,1684.0,1616.0,68.0,23.0,25.0,2.0,Washington State,home,W,fbs,401856781
+Washington State,2026,2,Week 2,1533.0,1601.0,-68.0,37.0,28.0,-9.0,Kansas State,away,L,fbs,401856781
+Oklahoma State,2026,2,Week 2,1274.0,1212.0,62.0,89.0,93.0,4.0,Oregon,home,W,fbs,401856782
+Oregon,2026,2,Week 2,1811.0,1873.0,-62.0,13.0,5.0,-8.0,Oklahoma State,away,L,fbs,401856782
+Old Dominion,2026,2,Week 2,1289.0,1336.0,-47.0,83.0,81.0,-2.0,Virginia Tech,away,L,fbs,401858221
+Virginia Tech,2026,2,Week 2,1468.0,1421.0,47.0,53.0,64.0,11.0,Old Dominion,home,W,fbs,401858221
+Purdue,2026,2,Week 2,1326.0,1318.0,8.0,77.0,83.0,6.0,Wake Forest,home,L,fbs,401858224
+Wake Forest,2026,2,Week 2,1508.0,1516.0,-8.0,46.0,47.0,1.0,Purdue,away,W,fbs,401858224
+Penn State,2026,2,Week 2,1880.0,1891.0,-11.0,6.0,4.0,-2.0,Temple,away,W,fbs,401858442
+Temple,2026,2,Week 2,1323.0,1312.0,11.0,80.0,85.0,5.0,Penn State,home,L,fbs,401858442
+Army,2026,2,Week 2,1530.0,1527.0,3.0,39.0,44.0,5.0,South Florida,home,L,fbs,401862702
+South Florida,2026,2,Week 2,1676.0,1679.0,-3.0,27.0,21.0,-6.0,Army,away,W,fbs,401862702
+App State,2026,2,Week 2,1325.0,1310.0,15.0,78.0,86.0,8.0,East Carolina,away,W,fbs,401864571
+East Carolina,2026,2,Week 2,1462.0,1477.0,-15.0,55.0,51.0,-4.0,App State,home,L,fbs,401864571
+Georgia,2026,2,Week 2,1948.0,1871.0,77.0,3.0,6.0,3.0,Western Kentucky,home,W,fbs,401856673
+Western Kentucky,2026,2,Week 2,1250.0,1327.0,-77.0,92.0,82.0,-10.0,Georgia,away,L,fbs,401856673
+Alabama,2026,2,Week 2,1859.0,1823.0,36.0,8.0,12.0,4.0,Kentucky,away,W,fbs,401856674
+Kentucky,2026,2,Week 2,1440.0,1476.0,-36.0,57.0,52.0,-5.0,Alabama,home,L,fbs,401856674
+Minnesota,2026,2,Week 2,1452.0,1510.0,-58.0,56.0,48.0,-8.0,Mississippi State,home,L,fbs,401856677
+Mississippi State,2026,2,Week 2,1642.0,1584.0,58.0,28.0,34.0,6.0,Minnesota,away,W,fbs,401856677
+Pittsburgh,2026,2,Week 2,1678.0,1681.0,-3.0,25.0,20.0,-5.0,UCF,home,W,fbs,401856790
+UCF,2026,2,Week 2,1468.0,1465.0,3.0,53.0,55.0,2.0,Pittsburgh,away,L,fbs,401856790
+Arizona,2026,2,Week 2,1608.0,1625.0,-17.0,31.0,24.0,-7.0,BYU,away,L,fbs,401856810
+BYU,2026,2,Week 2,1683.0,1666.0,17.0,24.0,22.0,-2.0,Arizona,home,W,fbs,401856810
+California,2026,2,Week 2,1350.0,1349.0,1.0,74.0,79.0,5.0,Syracuse,away,W,fbs,401858216
+Syracuse,2026,2,Week 2,1287.0,1288.0,-1.0,84.0,87.0,3.0,California,home,L,fbs,401858216
+Duke,2026,2,Week 2,1613.0,1607.0,6.0,29.0,27.0,-2.0,Illinois,away,W,fbs,401858217
+Illinois,2026,2,Week 2,1589.0,1595.0,-6.0,33.0,29.0,-4.0,Duke,home,L,fbs,401858217
+Eastern Michigan,2026,2,Week 2,1293.0,1353.0,-60.0,82.0,77.0,-5.0,Michigan State,away,L,fbs,401858440
+Michigan State,2026,2,Week 2,1528.0,1468.0,60.0,40.0,53.0,13.0,Eastern Michigan,home,W,fbs,401858440
+Maryland,2026,2,Week 2,1495.0,1424.0,71.0,47.0,62.0,15.0,UConn,away,W,fbs,401858444
+UConn,2026,2,Week 2,1413.0,1484.0,-71.0,62.0,50.0,-12.0,Maryland,home,L,fbs,401858444
+Utah State,2026,2,Week 2,1381.0,1376.0,5.0,70.0,72.0,2.0,Washington,away,L,fbs,401858446
+Washington,2026,2,Week 2,1757.0,1762.0,-5.0,16.0,15.0,-1.0,Utah State,home,W,fbs,401858446
+Notre Dame,2026,2,Week 2,2070.0,2021.0,49.0,1.0,1.0,0.0,Rice,home,W,fbs,401859184
+Rice,2026,2,Week 2,1147.0,1196.0,-49.0,97.0,94.0,-3.0,Notre Dame,away,L,fbs,401859184
+Texas State,2026,2,Week 2,1438.0,1441.0,-3.0,58.0,58.0,0.0,UTSA,home,L,fbs,401860884
+UTSA,2026,2,Week 2,1525.0,1522.0,3.0,43.0,45.0,2.0,Texas State,away,W,fbs,401860884
+UAB,2026,2,Week 2,1403.0,1411.0,-8.0,66.0,65.0,-1.0,UL Monroe,home,W,fbs,401862708
+UL Monroe,2026,2,Week 2,1079.0,1071.0,8.0,98.0,98.0,0.0,UAB,away,L,fbs,401862708
+North Texas,2026,2,Week 2,1699.0,1590.0,109.0,21.0,31.0,10.0,UNLV,home,W,fbs,401862705
+UNLV,2026,2,Week 2,1480.0,1589.0,-109.0,51.0,32.0,-19.0,North Texas,away,L,fbs,401862705
+Delaware,2026,2,Week 2,1411.0,1404.0,7.0,63.0,66.0,3.0,Vanderbilt,away,L,fbs,401856684
+Vanderbilt,2026,2,Week 2,1746.0,1753.0,-7.0,17.0,16.0,-1.0,Delaware,home,W,fbs,401856684
+Boise State,2026,2,Week 2,1609.0,1569.0,40.0,30.0,36.0,6.0,Memphis,home,W,fbs,401860881
+Memphis,2026,2,Week 2,1526.0,1566.0,-40.0,42.0,37.0,-5.0,Boise State,away,L,fbs,401860881
+Buffalo,2026,2,Week 2,1341.0,1365.0,-24.0,75.0,76.0,1.0,Florida International,away,L,fbs,401866414
+Florida International,2026,2,Week 2,1409.0,1385.0,24.0,64.0,70.0,6.0,Buffalo,home,W,fbs,401866414
+Jacksonville State,2026,2,Week 2,1426.0,1428.0,-2.0,60.0,60.0,0.0,Ohio,away,L,fbs,401866418
+Ohio,2026,2,Week 2,1320.0,1318.0,2.0,81.0,83.0,2.0,Jacksonville State,home,W,fbs,401866418
+Georgia Tech,2026,2,Week 2,1515.0,1553.0,-38.0,44.0,39.0,-5.0,Tennessee,home,L,fbs,401856681
+Tennessee,2026,2,Week 2,1729.0,1691.0,38.0,18.0,18.0,0.0,Georgia Tech,away,W,fbs,401856681
+Bowling Green,2026,2,Week 2,1227.0,1340.0,-113.0,93.0,80.0,-13.0,Nebraska,away,L,fbs,401858441
+Nebraska,2026,2,Week 2,1705.0,1592.0,113.0,19.0,30.0,11.0,Bowling Green,home,W,fbs,401858441
+Sam Houston,2026,2,Week 2,1161.0,1164.0,-3.0,96.0,97.0,1.0,Tulsa,home,L,fbs,401862707
+Tulsa,2026,2,Week 2,1271.0,1268.0,3.0,90.0,89.0,-1.0,Sam Houston,away,W,fbs,401862707
+South Alabama,2026,2,Week 2,1391.0,1390.0,1.0,67.0,67.0,0.0,Tulane,away,L,fbs,401864575
+Tulane,2026,2,Week 2,1528.0,1529.0,-1.0,40.0,43.0,3.0,South Alabama,home,W,fbs,401864575
+Georgia State,2026,2,Week 2,1287.0,1241.0,46.0,84.0,92.0,8.0,Kennesaw State,away,W,fbs,401869955
+Kennesaw State,2026,2,Week 2,1327.0,1373.0,-46.0,76.0,74.0,-2.0,Georgia State,home,L,fbs,401869955
+Marshall,2026,2,Week 2,1388.0,1389.0,-1.0,68.0,68.0,0.0,Middle Tennessee,home,W,fbs,401871045
+Middle Tennessee,2026,2,Week 2,1277.0,1276.0,1.0,88.0,88.0,0.0,Marshall,away,L,fbs,401871045
+San Diego State,2026,2,Week 2,1469.0,1518.0,-49.0,52.0,46.0,-6.0,UCLA,away,L,fbs,401858443
+UCLA,2026,2,Week 2,1487.0,1438.0,49.0,49.0,59.0,10.0,San Diego State,home,W,fbs,401858443
+Ohio State,2026,2,Week 2,1983.0,1986.0,-3.0,2.0,2.0,0.0,Texas,away,L,fbs,401856682
+Texas,2026,2,Week 2,1916.0,1913.0,3.0,4.0,3.0,-1.0,Ohio State,home,W,fbs,401856682
+Oregon State,2026,2,Week 2,1285.0,1260.0,25.0,86.0,91.0,5.0,Texas Tech,home,L,fbs,401856783
+Texas Tech,2026,2,Week 2,1845.0,1870.0,-25.0,10.0,7.0,-3.0,Oregon State,away,W,fbs,401856783
+Iowa,2026,2,Week 2,1845.0,1847.0,-2.0,10.0,9.0,-1.0,Iowa State,home,W,fbs,401856788
+Iowa State,2026,2,Week 2,1588.0,1586.0,2.0,34.0,33.0,-1.0,Iowa,away,L,fbs,401856788
+Clemson,2026,2,Week 2,1558.0,1541.0,17.0,36.0,42.0,6.0,Georgia Southern,home,W,fbs,401858219
+Georgia Southern,2026,2,Week 2,1359.0,1376.0,-17.0,73.0,72.0,-1.0,Clemson,away,L,fbs,401858219
+Florida Atlantic,2026,2,Week 2,1226.0,1189.0,37.0,94.0,95.0,1.0,Navy,home,W,fbs,401862703
+Navy,2026,2,Week 2,1513.0,1550.0,-37.0,45.0,40.0,-5.0,Florida Atlantic,away,L,fbs,401862703
+LSU,2026,2,Week 2,1794.0,1745.0,49.0,14.0,17.0,3.0,Louisiana Tech,home,W,fbs,401867796
+Louisiana Tech,2026,2,Week 2,1405.0,1454.0,-49.0,65.0,56.0,-9.0,LSU,away,L,fbs,401867796
+Auburn,2026,2,Week 2,1678.0,1613.0,65.0,25.0,26.0,1.0,Southern Miss,home,W,fbs,401856671
+Southern Miss,2026,2,Week 2,1285.0,1350.0,-65.0,86.0,78.0,-8.0,Auburn,away,L,fbs,401856671
+Charlotte,2026,2,Week 2,1168.0,1182.0,-14.0,95.0,96.0,1.0,Ole Miss,away,L,fbs,401856676
+Ole Miss,2026,2,Week 2,1851.0,1837.0,14.0,9.0,10.0,1.0,Charlotte,home,W,fbs,401856676
+Air Force,2026,2,Week 2,1423.0,1424.0,-1.0,61.0,62.0,1.0,North Dakota State,home,L,fbs,401864502
+North Dakota State,2026,2,Week 2,1567.0,1566.0,1.0,35.0,37.0,2.0,Air Force,away,W,fbs,401864502
+Arkansas,2026,2,Week 2,1490.0,1547.0,-57.0,48.0,41.0,-7.0,Utah,away,L,fbs,401856670
+Utah,2026,2,Week 2,1874.0,1817.0,57.0,7.0,13.0,6.0,Arkansas,home,W,fbs,401856670
+Fresno State,2026,2,Week 2,1591.0,1449.0,142.0,32.0,57.0,25.0,Sacramento State,home,W,fbs,401860883
+Sacramento State,2026,2,Week 2,1324.0,1466.0,-142.0,79.0,54.0,-25.0,Fresno State,away,L,fbs,401860883
+Louisiana,2026,2,Week 2,1387.0,1389.0,-2.0,69.0,68.0,-1.0,USC,away,L,fbs,401858445
+USC,2026,2,Week 2,1837.0,1835.0,2.0,12.0,11.0,-1.0,Louisiana,home,W,fbs,401858445
+Hawai'i,2026,2,Week 2,1432.0,1426.0,6.0,59.0,61.0,2.0,New Mexico State,home,W,fbs,401864578
+New Mexico State,2026,2,Week 2,1261.0,1267.0,-6.0,91.0,90.0,-1.0,Hawai'i,away,L,fbs,401864578
