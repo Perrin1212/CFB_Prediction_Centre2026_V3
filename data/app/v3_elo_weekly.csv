@@ -199,3 +199,117 @@ Louisiana,2026,2,Week 2,1387.7984168641822,1389.0,-1.2015831358178275,69.0,68.0,
 USC,2026,2,Week 2,1836.2015831358178,1835.0,1.2015831358178275,11.0,11.0,0.0,Louisiana,home,W,fbs,Big Ten,#990000,https://cdn.collegefootballdata.com/logos/500/30.png,USC,fbs,401858445
 Hawai'i,2026,2,Week 2,1430.142533204669,1426.0,4.142533204669007,61.0,61.0,0.0,New Mexico State,home,W,fbs,Mountain West,#024731,https://cdn.collegefootballdata.com/logos/500/62.png,HAW,fbs,401864578
 New Mexico State,2026,2,Week 2,1262.857466795331,1267.0,-4.142533204669007,90.0,90.0,0.0,Hawai'i,away,L,fbs,Conference USA,#8c0b42,https://cdn.collegefootballdata.com/logos/500/166.png,NMSU,fbs,401864578
+Pittsburgh,2026,3,Week 3,1679.4634309568692,1678.0,1.4634309568691606,27.0,27.0,0.0,Syracuse,home,W,fbs,ACC,#003594,https://cdn.collegefootballdata.com/logos/500/221.png,PITT,fbs,401858225
+Syracuse,2026,3,Week 3,1285.5365690431308,1287.0,-1.4634309568691606,97.0,97.0,0.0,Pittsburgh,away,L,fbs,ACC,#f76900,https://cdn.collegefootballdata.com/logos/500/183.png,SYR,fbs,401858225
+Miami,2026,3,Week 3,1903.775422700461,1901.0,2.775422700460922,6.0,6.0,0.0,Wake Forest,away,W,fbs,ACC,#f47321,https://cdn.collegefootballdata.com/logos/500/2390.png,MIA,fbs,401858226
+Wake Forest,2026,3,Week 3,1505.224577299539,1508.0,-2.775422700460922,52.0,51.0,-1.0,Miami,home,L,fbs,ACC,#ceb888,https://cdn.collegefootballdata.com/logos/500/154.png,WAKE,fbs,401858226
+Houston,2026,3,Week 3,1512.7932091699854,1514.0,-1.2067908300145973,50.0,50.0,0.0,Texas Tech,away,L,fbs,Big 12,#c8102e,https://cdn.collegefootballdata.com/logos/500/248.png,HOU,fbs,401856811
+Texas Tech,2026,3,Week 3,1846.2067908300146,1845.0,1.2067908300145973,12.0,12.0,0.0,Houston,home,W,fbs,Big 12,#c30020,https://cdn.collegefootballdata.com/logos/500/2641.png,TTU,fbs,401856811
+Coastal Carolina,2026,3,Week 3,1265.886701915044,1270.0,-4.113298084956114,103.0,102.0,-1.0,Delaware,away,L,fbs,Sun Belt,#006f71,https://cdn.collegefootballdata.com/logos/500/324.png,CCU,fbs,401869940
+Delaware,2026,3,Week 3,1415.113298084956,1411.0,4.113298084956114,70.0,71.0,1.0,Coastal Carolina,home,W,fbs,Conference USA,#00539f,https://cdn.collegefootballdata.com/logos/500/48.png,DEL,fbs,401869940
+Arkansas,2026,3,Week 3,1487.4598567803362,1490.0,-2.5401432196638325,55.0,55.0,0.0,Georgia,home,L,fbs,SEC,#a32136,https://cdn.collegefootballdata.com/logos/500/8.png,ARK,fbs,401856686
+Georgia,2026,3,Week 3,1950.5401432196638,1948.0,2.5401432196638325,4.0,4.0,0.0,Arkansas,away,W,fbs,SEC,#ba0c2f,https://cdn.collegefootballdata.com/logos/500/61.png,UGA,fbs,401856686
+Kansas State,2026,3,Week 3,1688.35126233034,1684.0,4.351262330339978,24.0,25.0,1.0,Tulane,home,W,fbs,Big 12,#512888,https://cdn.collegefootballdata.com/logos/500/2306.png,KSU,fbs,401856792
+Tulane,2026,3,Week 3,1523.64873766966,1528.0,-4.351262330339978,47.0,46.0,-1.0,Kansas State,away,L,fbs,American Athletic,#006747,https://cdn.collegefootballdata.com/logos/500/2655.png,TULN,fbs,401856792
+Bowling Green,2026,3,Week 3,1224.8596036569575,1227.0,-2.1403963430425392,108.0,107.0,-1.0,Iowa State,away,L,fbs,Mid-American,#fd5000,https://cdn.collegefootballdata.com/logos/500/189.png,BGSU,fbs,401856798
+Iowa State,2026,3,Week 3,1590.1403963430425,1588.0,2.1403963430425392,37.0,37.0,0.0,Bowling Green,home,W,fbs,Big 12,#c8102e,https://cdn.collegefootballdata.com/logos/500/66.png,ISU,fbs,401856798
+Arizona State,2026,3,Week 3,1538.2228952280293,1531.0,7.2228952280293015,44.0,45.0,1.0,Kansas,away,W,fbs,Big 12,#ffc627,https://cdn.collegefootballdata.com/logos/500/9.png,ASU,fbs,401856812
+Kansas,2026,3,Week 3,1477.7771047719707,1485.0,-7.2228952280293015,59.0,57.0,-2.0,Arizona State,home,L,fbs,Big 12,#0051ba,https://cdn.collegefootballdata.com/logos/500/2305.png,KU,fbs,401856812
+Clemson,2026,3,Week 3,1561.7787562955023,1558.0,3.778756295502262,40.0,40.0,0.0,North Carolina,home,W,fbs,ACC,#f56600,https://cdn.collegefootballdata.com/logos/500/228.png,CLEM,fbs,401858229
+North Carolina,2026,3,Week 3,1394.2212437044977,1398.0,-3.778756295502262,78.0,76.0,-2.0,Clemson,away,L,fbs,ACC,#7bafd4,https://cdn.collegefootballdata.com/logos/500/153.png,UNC,fbs,401858229
+Akron,2026,3,Week 3,928.1151049307261,929.0,-0.8848950692738526,114.0,114.0,0.0,Minnesota,away,L,fbs,Mid-American,#041e42,https://cdn.collegefootballdata.com/logos/500/2006.png,AKR,fbs,401858451
+Minnesota,2026,3,Week 3,1452.8848950692739,1452.0,0.8848950692738526,65.0,64.0,-1.0,Akron,home,W,fbs,Big Ten,#7a0019,https://cdn.collegefootballdata.com/logos/500/135.png,MINN,fbs,401858451
+Kent State,2026,3,Week 3,1055.9108896692373,1056.0,-0.08911033076265085,113.0,113.0,0.0,Ohio State,away,L,fbs,Mid-American,#002664,https://cdn.collegefootballdata.com/logos/500/2309.png,KENT,fbs,401858454
+Ohio State,2026,3,Week 3,1983.0891103307627,1983.0,0.08911033076265085,3.0,3.0,0.0,Kent State,home,W,fbs,Big Ten,#ba0c2f,https://cdn.collegefootballdata.com/logos/500/194.png,OSU,fbs,401858454
+Buffalo,2026,3,Week 3,1340.190632092693,1341.0,-0.8093679073069779,86.0,86.0,0.0,Penn State,away,L,fbs,Mid-American,#005bbb,https://cdn.collegefootballdata.com/logos/500/2084.png,BUF,fbs,401858456
+Penn State,2026,3,Week 3,1880.809367907307,1880.0,0.8093679073069779,7.0,8.0,1.0,Buffalo,home,W,fbs,Big Ten,#001e44,https://cdn.collegefootballdata.com/logos/500/213.png,PSU,fbs,401858456
+North Texas,2026,3,Week 3,1682.6321355157647,1699.0,-16.36786448423527,26.0,22.0,-4.0,Texas State,away,L,fbs,American Athletic,#00853e,https://cdn.collegefootballdata.com/logos/500/249.png,UNT,fbs,401860889
+Texas State,2026,3,Week 3,1454.3678644842353,1438.0,16.36786448423527,64.0,66.0,2.0,North Texas,home,W,fbs,Pac-12,#501214,https://cdn.collegefootballdata.com/logos/500/326.png,TXST,fbs,401860889
+Eastern Michigan,2026,3,Week 3,1287.7519477391786,1293.0,-5.248052260821396,96.0,95.0,-1.0,Wisconsin,away,L,fbs,Mid-American,#046a38,https://cdn.collegefootballdata.com/logos/500/2199.png,EMU,fbs,401858460
+Wisconsin,2026,3,Week 3,1480.2480522608214,1475.0,5.248052260821396,57.0,58.0,1.0,Eastern Michigan,home,W,fbs,Big Ten,#a00000,https://cdn.collegefootballdata.com/logos/500/275.png,WIS,fbs,401858460
+NC State,2026,3,Week 3,1504.0847483767295,1506.0,-1.9152516232704784,53.0,52.0,-1.0,Vanderbilt,away,L,fbs,ACC,#cc0000,https://cdn.collegefootballdata.com/logos/500/152.png,NCSU,fbs,401856695
+Vanderbilt,2026,3,Week 3,1747.9152516232705,1746.0,1.9152516232704784,17.0,17.0,0.0,NC State,home,W,fbs,SEC,#000000,https://cdn.collegefootballdata.com/logos/500/238.png,VAN,fbs,401856695
+Central Michigan,2026,3,Week 3,1269.0851267767905,1259.0,10.085126776790503,102.0,104.0,2.0,Wyoming,home,W,fbs,Mid-American,#6a0032,https://cdn.collegefootballdata.com/logos/500/2117.png,CMU,fbs,401864508
+Wyoming,2026,3,Week 3,1289.9148732232095,1300.0,-10.085126776790503,94.0,94.0,0.0,Central Michigan,away,L,fbs,Mountain West,#492f24,https://cdn.collegefootballdata.com/logos/500/2751.png,WYO,fbs,401864508
+Temple,2026,3,Week 3,1321.131276781276,1323.0,-1.8687232187239715,91.0,92.0,1.0,Toledo,away,L,fbs,American Athletic,#a41e35,https://cdn.collegefootballdata.com/logos/500/218.png,TEM,fbs,401862774
+Toledo,2026,3,Week 3,1569.868723218724,1568.0,1.8687232187239715,39.0,38.0,-1.0,Temple,home,W,fbs,Mid-American,#0b2240,https://cdn.collegefootballdata.com/logos/500/2649.png,TOL,fbs,401862774
+Alabama,2026,3,Week 3,1861.3370708523214,1859.0,2.3370708523214034,10.0,10.0,0.0,Florida State,home,W,fbs,SEC,#9e1b32,https://cdn.collegefootballdata.com/logos/500/333.png,ALA,fbs,401856685
+Florida State,2026,3,Week 3,1554.6629291476786,1557.0,-2.3370708523214034,43.0,42.0,-1.0,Alabama,away,L,fbs,ACC,#782f40,https://cdn.collegefootballdata.com/logos/500/52.png,FSU,fbs,401856685
+Kentucky,2026,3,Week 3,1458.2421896084386,1440.0,18.242189608438593,63.0,65.0,2.0,Texas A&M,away,W,fbs,SEC,#0033a0,https://cdn.collegefootballdata.com/logos/500/96.png,UK,fbs,401856694
+Texas A&M,2026,3,Week 3,1871.7578103915614,1890.0,-18.242189608438593,9.0,7.0,-2.0,Kentucky,home,L,fbs,SEC,#500000,https://cdn.collegefootballdata.com/logos/500/245.png,TA&M,fbs,401856694
+Cincinnati,2026,3,Week 3,1517.760888929653,1516.0,1.7608889296529924,49.0,49.0,0.0,Miami (OH),home,W,fbs,Big 12,#000000,https://cdn.collegefootballdata.com/logos/500/2132.png,CIN,fbs,401856797
+Miami (OH),2026,3,Week 3,1257.239111070347,1259.0,-1.7608889296529924,105.0,104.0,-1.0,Cincinnati,away,L,fbs,Mid-American,#c41230,https://cdn.collegefootballdata.com/logos/500/193.png,M-OH,fbs,401856797
+Utah,2026,3,Week 3,1875.0452423045738,1874.0,1.045242304573776,8.0,9.0,1.0,Utah State,home,W,fbs,Big 12,#be0000,https://cdn.collegefootballdata.com/logos/500/254.png,UTAH,fbs,401856801
+Utah State,2026,3,Week 3,1379.9547576954262,1381.0,-1.045242304573776,81.0,80.0,-1.0,Utah,away,L,fbs,Pac-12,#0f2439,https://cdn.collegefootballdata.com/logos/500/328.png,USU,fbs,401856801
+Louisville,2026,3,Week 3,1677.4535566718532,1668.0,9.453556671853221,28.0,29.0,1.0,SMU,home,W,fbs,ACC,#c9001f,https://cdn.collegefootballdata.com/logos/500/97.png,LOU,fbs,401858230
+SMU,2026,3,Week 3,1718.5464433281468,1728.0,-9.453556671853221,20.0,20.0,0.0,Louisville,away,L,fbs,ACC,#d70000,https://cdn.collegefootballdata.com/logos/500/2567.png,SMU,fbs,401858230
+Michigan,2026,3,Week 3,1702.809367907307,1702.0,0.8093679073069779,21.0,21.0,0.0,UTEP,home,W,fbs,Big Ten,#00274c,https://cdn.collegefootballdata.com/logos/500/130.png,MICH,fbs,401858450
+UTEP,2026,3,Week 3,1162.190632092693,1163.0,-0.8093679073069779,110.0,110.0,0.0,Michigan,away,L,fbs,Mountain West,#ff8200,https://cdn.collegefootballdata.com/logos/500/2638.png,UTEP,fbs,401858450
+Rutgers,2026,3,Week 3,1369.4955744636898,1371.0,-1.5044255363102366,82.0,81.0,-1.0,USC,home,L,fbs,Big Ten,#ce0e2d,https://cdn.collegefootballdata.com/logos/500/164.png,RUTG,fbs,401858457
+USC,2026,3,Week 3,1838.5044255363102,1837.0,1.5044255363102366,13.0,13.0,0.0,Rutgers,away,W,fbs,Big Ten,#990000,https://cdn.collegefootballdata.com/logos/500/30.png,USC,fbs,401858457
+Duke,2026,3,Week 3,1616.612715598055,1613.0,3.612715598055047,33.0,33.0,0.0,Stanford,home,W,fbs,ACC,#00539b,https://cdn.collegefootballdata.com/logos/500/150.png,DUKE,fbs,401858231
+Stanford,2026,3,Week 3,1350.387284401945,1354.0,-3.612715598055047,84.0,84.0,0.0,Duke,away,L,fbs,ACC,#8c1515,https://cdn.collegefootballdata.com/logos/500/24.png,STAN,fbs,401858231
+Indiana,2026,3,Week 3,2113.1286145370495,2113.0,0.1286145370495433,1.0,1.0,0.0,Western Kentucky,home,W,fbs,Big Ten,#990000,https://cdn.collegefootballdata.com/logos/500/84.png,IU,fbs,401858449
+Western Kentucky,2026,3,Week 3,1249.8713854629502,1250.0,-0.12861453704977066,106.0,106.0,0.0,Indiana,away,L,fbs,Conference USA,#c60c30,https://cdn.collegefootballdata.com/logos/500/98.png,WKU,fbs,401858449
+Ball State,2026,3,Week 3,1111.3745606048333,1112.0,-0.6254393951667225,112.0,112.0,0.0,Liberty,away,L,fbs,Mid-American,#ba0c2f,https://cdn.collegefootballdata.com/logos/500/2050.png,BALL,fbs,401866422
+Liberty,2026,3,Week 3,1697.6254393951667,1697.0,0.6254393951667225,22.0,23.0,1.0,Ball State,home,W,fbs,Conference USA,#0a254e,https://cdn.collegefootballdata.com/logos/500/2335.png,LIB,fbs,401866422
+Baylor,2026,3,Week 3,1512.4227636740743,1506.0,6.422763674074304,51.0,52.0,1.0,Louisiana Tech,home,W,fbs,Big 12,#154734,https://cdn.collegefootballdata.com/logos/500/239.png,BAY,fbs,401867804
+Louisiana Tech,2026,3,Week 3,1398.5772363259257,1405.0,-6.422763674074304,74.0,74.0,0.0,Baylor,away,L,fbs,Sun Belt,#003087,https://cdn.collegefootballdata.com/logos/500/2348.png,LT,fbs,401867804
+Mississippi State,2026,3,Week 3,1653.995520429652,1642.0,11.99552042965206,31.0,32.0,1.0,South Carolina,away,W,fbs,SEC,#5d1725,https://cdn.collegefootballdata.com/logos/500/344.png,MSST,fbs,401856691
+South Carolina,2026,3,Week 3,1730.004479570348,1742.0,-11.99552042965206,19.0,18.0,-1.0,Mississippi State,home,L,fbs,SEC,#73000a,https://cdn.collegefootballdata.com/logos/500/2579.png,SC,fbs,401856691
+East Carolina,2026,3,Week 3,1466.5421398368596,1462.0,4.542139836859633,61.0,62.0,1.0,Old Dominion,away,W,fbs,American Athletic,#592a8a,https://cdn.collegefootballdata.com/logos/500/151.png,ECU,fbs,401862710
+Old Dominion,2026,3,Week 3,1284.4578601631404,1289.0,-4.542139836859633,98.0,96.0,-2.0,East Carolina,home,L,fbs,Sun Belt,#043657,https://cdn.collegefootballdata.com/logos/500/295.png,ODU,fbs,401862710
+Florida Atlantic,2026,3,Week 3,1236.3300445762302,1226.0,10.330044576230193,107.0,108.0,1.0,Florida International,home,W,fbs,American Athletic,#003366,https://cdn.collegefootballdata.com/logos/500/2226.png,FAU,fbs,401862771
+Florida International,2026,3,Week 3,1398.6699554237698,1409.0,-10.330044576230193,73.0,72.0,-1.0,Florida Atlantic,away,L,fbs,Conference USA,#091f3f,https://cdn.collegefootballdata.com/logos/500/2229.png,FIU,fbs,401862771
+App State,2026,3,Week 3,1328.1234235436823,1325.0,3.123423543682293,88.0,90.0,2.0,Charlotte,home,W,fbs,Sun Belt,#000000,https://cdn.collegefootballdata.com/logos/500/2026.png,APP,fbs,401864574
+Charlotte,2026,3,Week 3,1164.8765764563177,1168.0,-3.123423543682293,109.0,109.0,0.0,App State,away,L,fbs,American Athletic,#005035,https://cdn.collegefootballdata.com/logos/500/2429.png,CLT,fbs,401864574
+Marshall,2026,3,Week 3,1394.9135702883993,1388.0,6.913570288399342,77.0,78.0,1.0,Missouri State,away,W,fbs,Sun Belt,#00b140,https://cdn.collegefootballdata.com/logos/500/276.png,MRSH,fbs,401871047
+Missouri State,2026,3,Week 3,1277.0864297116007,1284.0,-6.913570288399342,100.0,100.0,0.0,Marshall,home,L,fbs,Conference USA,#5e0009,https://cdn.collegefootballdata.com/logos/500/2623.png,MOST,fbs,401871047
+Auburn,2026,3,Week 3,1669.1137135965268,1678.0,-8.88628640347315,29.0,27.0,-2.0,Florida,home,L,fbs,SEC,#0c2340,https://cdn.collegefootballdata.com/logos/500/2.png,AUB,fbs,401856687
+Florida,2026,3,Week 3,1666.8862864034732,1658.0,8.88628640347315,30.0,30.0,0.0,Auburn,away,W,fbs,SEC,#0021a5,https://cdn.collegefootballdata.com/logos/500/57.png,FLA,fbs,401856687
+Missouri,2026,3,Week 3,1693.422633476956,1691.0,2.42263347695598,23.0,24.0,1.0,Troy,home,W,fbs,SEC,#f1b82d,https://cdn.collegefootballdata.com/logos/500/142.png,MIZ,fbs,401856689
+Troy,2026,3,Week 3,1417.577366523044,1420.0,-2.42263347695598,69.0,68.0,-1.0,Missouri,away,L,fbs,Sun Belt,#862633,https://cdn.collegefootballdata.com/logos/500/2653.png,TROY,fbs,401856689
+Georgia State,2026,3,Week 3,1282.769477335683,1287.0,-4.23052266431705,99.0,97.0,-2.0,UCF,away,L,fbs,Sun Belt,#0039a6,https://cdn.collegefootballdata.com/logos/500/2247.png,GAST,fbs,401856800
+UCF,2026,3,Week 3,1472.230522664317,1468.0,4.23052266431705,60.0,60.0,0.0,Georgia State,home,W,fbs,Big 12,#000000,https://cdn.collegefootballdata.com/logos/500/2116.png,UCF,fbs,401856800
+Southern Miss,2026,3,Week 3,1273.946743769188,1285.0,-11.05325623081194,101.0,99.0,-2.0,UConn,home,L,fbs,Sun Belt,#ffc72c,https://cdn.collegefootballdata.com/logos/500/2572.png,USM,fbs,401861963
+UConn,2026,3,Week 3,1424.053256230812,1413.0,11.05325623081194,68.0,69.0,1.0,Southern Miss,away,W,fbs,FBS Independents,#000e2f,https://cdn.collegefootballdata.com/logos/500/41.png,CONN,fbs,401861963
+Rice,2026,3,Week 3,1144.7466673288586,1147.0,-2.2533326711413793,111.0,111.0,0.0,Western Michigan,home,L,fbs,American Athletic,#00205b,https://cdn.collegefootballdata.com/logos/500/242.png,RICE,fbs,401862773
+Western Michigan,2026,3,Week 3,1536.2533326711414,1534.0,2.2533326711413793,45.0,44.0,-1.0,Rice,away,W,fbs,Mid-American,#532e1f,https://cdn.collegefootballdata.com/logos/500/2711.png,WMU,fbs,401862773
+Middle Tennessee,2026,3,Week 3,1288.0815839362308,1277.0,11.0815839362308,95.0,101.0,6.0,Nevada,home,W,fbs,Conference USA,#036eb7,https://cdn.collegefootballdata.com/logos/500/2393.png,MTSU,fbs,401864443
+Nevada,2026,3,Week 3,1450.9184160637692,1462.0,-11.0815839362308,66.0,62.0,-4.0,Middle Tennessee,away,L,fbs,Mountain West,#041e42,https://cdn.collegefootballdata.com/logos/500/2440.png,NEV,fbs,401864443
+Ohio,2026,3,Week 3,1315.5034041296774,1320.0,-4.496595870322608,93.0,93.0,0.0,South Alabama,away,L,fbs,Mid-American,#024230,https://cdn.collegefootballdata.com/logos/500/195.png,OHIO,fbs,401866423
+South Alabama,2026,3,Week 3,1395.4965958703226,1391.0,4.496595870322608,76.0,77.0,1.0,Ohio,home,W,fbs,Sun Belt,#00205b,https://cdn.collegefootballdata.com/logos/500/6.png,USA,fbs,401866423
+Georgia Southern,2026,3,Week 3,1354.8571838571631,1359.0,-4.142816142836864,83.0,83.0,0.0,Jacksonville State,away,L,fbs,Sun Belt,#041e42,https://cdn.collegefootballdata.com/logos/500/290.png,GASO,fbs,401869948
+Jacksonville State,2026,3,Week 3,1430.1428161428369,1426.0,4.142816142836864,67.0,67.0,0.0,Georgia Southern,home,W,fbs,Conference USA,#cc0000,https://cdn.collegefootballdata.com/logos/500/55.png,JXST,fbs,401869948
+LSU,2026,3,Week 3,1788.1763873232242,1794.0,-5.823612676775838,14.0,14.0,0.0,Ole Miss,away,L,fbs,SEC,#461d7c,https://cdn.collegefootballdata.com/logos/500/99.png,LSU,fbs,401856688
+Ole Miss,2026,3,Week 3,1856.8236126767758,1851.0,5.823612676775838,11.0,11.0,0.0,LSU,home,W,fbs,SEC,#13294b,https://cdn.collegefootballdata.com/logos/500/145.png,MISS,fbs,401856688
+New Mexico,2026,3,Week 3,1555.2137850632669,1558.0,-2.7862149367331313,42.0,40.0,-2.0,Oklahoma,away,L,fbs,Mountain West,#ba0c2f,https://cdn.collegefootballdata.com/logos/500/167.png,UNM,fbs,401856690
+Oklahoma,2026,3,Week 3,1785.7862149367331,1783.0,2.7862149367331313,15.0,15.0,0.0,New Mexico,home,W,fbs,SEC,#841617,https://cdn.collegefootballdata.com/logos/500/201.png,OU,fbs,401856690
+BYU,2026,3,Week 3,1686.8807038579364,1683.0,3.880703857936396,25.0,26.0,1.0,Colorado State,away,W,fbs,Big 12,#003da5,https://cdn.collegefootballdata.com/logos/500/252.png,BYU,fbs,401856795
+Colorado State,2026,3,Week 3,1332.1192961420636,1336.0,-3.880703857936396,87.0,87.0,0.0,BYU,home,L,fbs,Pac-12,#1e4d2b,https://cdn.collegefootballdata.com/logos/500/36.png,CSU,fbs,401856795
+Colorado,2026,3,Week 3,1399.7374040855248,1406.0,-6.262595914475241,72.0,73.0,1.0,Northwestern,away,L,fbs,Big 12,#cfb87c,https://cdn.collegefootballdata.com/logos/500/38.png,COLO,fbs,401856796
+Northwestern,2026,3,Week 3,1555.2625959144752,1549.0,6.262595914475241,41.0,43.0,2.0,Colorado,home,W,fbs,Big Ten,#582c83,https://cdn.collegefootballdata.com/logos/500/77.png,NU,fbs,401856796
+Virginia,2026,3,Week 3,1638.2717601734928,1655.0,-16.728239826507206,32.0,31.0,-1.0,West Virginia,home,L,fbs,ACC,#232d4b,https://cdn.collegefootballdata.com/logos/500/258.png,UVA,fbs,401856802
+West Virginia,2026,3,Week 3,1381.7282398265072,1365.0,16.728239826507206,80.0,82.0,2.0,Virginia,away,W,fbs,Big 12,#eaaa00,https://cdn.collegefootballdata.com/logos/500/277.png,WVU,fbs,401856802
+Maryland,2026,3,Week 3,1483.4062345078064,1495.0,-11.593765492193597,56.0,54.0,-2.0,Virginia Tech,home,L,fbs,Big Ten,#ce1126,https://cdn.collegefootballdata.com/logos/500/120.png,MD,fbs,401858232
+Virginia Tech,2026,3,Week 3,1479.5937654921936,1468.0,11.593765492193597,58.0,60.0,2.0,Maryland,away,W,fbs,ACC,#861f41,https://cdn.collegefootballdata.com/logos/500/259.png,VT,fbs,401858232
+Michigan State,2026,3,Week 3,1527.3183697443449,1528.0,-0.6816302556551364,46.0,46.0,0.0,Notre Dame,away,L,fbs,Big Ten,#173f35,https://cdn.collegefootballdata.com/logos/500/127.png,MSU,fbs,401858453
+Notre Dame,2026,3,Week 3,2070.6816302556554,2070.0,0.6816302556553637,2.0,2.0,0.0,Michigan State,home,W,fbs,FBS Independents,#0c2340,https://cdn.collegefootballdata.com/logos/500/87.png,ND,fbs,401858453
+Kennesaw State,2026,3,Week 3,1325.2809319096743,1327.0,-1.7190680903256634,89.0,88.0,-1.0,Tennessee,away,L,fbs,Conference USA,#fdbb30,https://cdn.collegefootballdata.com/logos/500/338.png,KENN,fbs,401856692
+Tennessee,2026,3,Week 3,1730.7190680903257,1729.0,1.7190680903256634,18.0,19.0,1.0,Kennesaw State,home,W,fbs,SEC,#ff8200,https://cdn.collegefootballdata.com/logos/500/2633.png,TENN,fbs,401856692
+Texas,2026,3,Week 3,1917.7394812424498,1916.0,1.7394812424497559,5.0,5.0,0.0,UTSA,home,W,fbs,SEC,#bf5700,https://cdn.collegefootballdata.com/logos/500/251.png,TEX,fbs,401856693
+UTSA,2026,3,Week 3,1523.2605187575502,1525.0,-1.7394812424497559,48.0,48.0,0.0,Texas,away,L,fbs,American Athletic,#0c2340,https://cdn.collegefootballdata.com/logos/500/2636.png,UTSA,fbs,401856693
+Arkansas State,2026,3,Week 3,1349.2432722207639,1353.0,-3.7567277792361438,85.0,85.0,0.0,TCU,away,L,fbs,Sun Belt,#cc092f,https://cdn.collegefootballdata.com/logos/500/2032.png,ARST,fbs,401856799
+TCU,2026,3,Week 3,1598.7567277792361,1595.0,3.7567277792361438,36.0,35.0,-1.0,Arkansas State,home,W,fbs,Big 12,#4d1979,https://cdn.collegefootballdata.com/logos/500/2628.png,TCU,fbs,401856799
+Louisiana,2026,3,Week 3,1394.1524001549392,1387.0,7.152400154939187,79.0,79.0,0.0,UAB,home,W,fbs,Sun Belt,#ce181e,https://cdn.collegefootballdata.com/logos/500/309.png,UL,fbs,401862776
+UAB,2026,3,Week 3,1395.8475998450608,1403.0,-7.152400154939187,75.0,75.0,0.0,Louisiana,away,L,fbs,American Athletic,#1a5632,https://cdn.collegefootballdata.com/logos/500/5.png,UAB,fbs,401862776
+James Madison,2026,3,Week 3,1780.1996704299568,1776.0,4.199670429956768,16.0,16.0,0.0,San Diego State,away,W,fbs,Sun Belt,#450084,https://cdn.collegefootballdata.com/logos/500/256.png,JMU,fbs,401860887
+San Diego State,2026,3,Week 3,1464.8003295700432,1469.0,-4.199670429956768,62.0,59.0,-3.0,James Madison,home,L,fbs,Pac-12,#a6192e,https://cdn.collegefootballdata.com/logos/500/21.png,SDSU,fbs,401860887
+Arizona,2026,3,Week 3,1610.284143256517,1608.0,2.284143256516927,34.0,34.0,0.0,Northern Illinois,home,W,fbs,Big 12,#cc0033,https://cdn.collegefootballdata.com/logos/500/12.png,ARIZ,fbs,401856793
+Northern Illinois,2026,3,Week 3,1263.715856743483,1266.0,-2.284143256516927,104.0,103.0,-1.0,Arizona,away,L,fbs,Mountain West,#c8102e,https://cdn.collegefootballdata.com/logos/500/2459.png,NIU,fbs,401856793
+North Dakota State,2026,3,Week 3,1573.5313122653747,1567.0,6.531312265374709,38.0,39.0,1.0,Sacramento State,away,W,fbs,Mountain West,#00583d,https://cdn.collegefootballdata.com/logos/500/2449.png,NDSU,fbs,401864507
+Sacramento State,2026,3,Week 3,1317.4686877346253,1324.0,-6.531312265374709,92.0,91.0,-1.0,North Dakota State,home,L,fbs,Mid-American,#00573c,https://cdn.collegefootballdata.com/logos/500/16.png,SAC,fbs,401864507
+Purdue,2026,3,Week 3,1321.3637444461892,1326.0,-4.63625555381077,90.0,89.0,-1.0,UCLA,away,L,fbs,Big Ten,#ceb888,https://cdn.collegefootballdata.com/logos/500/2509.png,PUR,fbs,401858458
+UCLA,2026,3,Week 3,1491.6362555538108,1487.0,4.63625555381077,54.0,56.0,2.0,Purdue,home,W,fbs,Big Ten,#2774ae,https://cdn.collegefootballdata.com/logos/500/26.png,UCLA,fbs,401858458
+Fresno State,2026,3,Week 3,1598.7716473029786,1591.0,7.771647302978636,35.0,36.0,1.0,San José State,away,W,fbs,Pac-12,#c41230,https://cdn.collegefootballdata.com/logos/500/278.png,FRES,fbs,401860888
+San José State,2026,3,Week 3,1405.2283526970214,1413.0,-7.771647302978636,71.0,69.0,-2.0,Fresno State,home,L,fbs,Mountain West,#0055a2,https://cdn.collegefootballdata.com/logos/500/23.png,SJSU,fbs,401860888
