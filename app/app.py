@@ -25,15 +25,11 @@ APP_DATA_DIR = PROJECT_ROOT / "data" / "app"
 
 GAMES_PATH = APP_DATA_DIR / "games.csv"
 GAMES_V3_PATH = APP_DATA_DIR / "games_v3.csv"
-V3_TRACKER_PATH = APP_DATA_DIR / "v3_tracker.csv"
 ELO_WEEKLY_PATH = APP_DATA_DIR / "elo_weekly.csv"
-V3_ELO_WEEKLY_PATH = APP_DATA_DIR / "v3_elo_weekly.csv"
 ELO_RANKINGS_PATH = APP_DATA_DIR / "elo_rankings_current.csv"
 PERFORMANCE_PATH = APP_DATA_DIR / "performance.json"
 BETTING_PATH = APP_DATA_DIR / "betting_performance.csv"
-V3_BETTING_PATH = APP_DATA_DIR / "v3_betting_performance.csv"
 TEAM_PROFILES_PATH = APP_DATA_DIR / "team_profiles.csv"
-V3_TEAM_PROFILES_PATH = APP_DATA_DIR / "v3_team_profiles.csv"
 
 
 # ============================================================
@@ -1062,24 +1058,47 @@ def safe_read_csv(path: Path) -> pd.DataFrame:
         return pd.DataFrame()
 
 
-@st.cache_data(ttl=120)
-def load_data():
-    games_source = V3_TRACKER_PATH if V3_TRACKER_PATH.exists() and V3_TRACKER_PATH.stat().st_size > 0 else (GAMES_V3_PATH if GAMES_V3_PATH.exists() and GAMES_V3_PATH.stat().st_size > 0 else GAMES_PATH)
+def file_signature(path: Path) -> tuple[str, int, int]:
+    """Return a cache key that changes whenever an app-data file changes."""
+    if not path.exists():
+        return str(path.resolve()), 0, 0
+    stat = path.stat()
+    return str(path.resolve()), int(stat.st_mtime_ns), int(stat.st_size)
+
+
+def app_data_signature() -> tuple[tuple[str, int, int], ...]:
+    games_source = (
+        GAMES_V3_PATH
+        if GAMES_V3_PATH.exists() and GAMES_V3_PATH.stat().st_size > 0
+        else GAMES_PATH
+    )
+    return tuple(
+        file_signature(path)
+        for path in (
+            games_source,
+            ELO_WEEKLY_PATH,
+            ELO_RANKINGS_PATH,
+            PERFORMANCE_PATH,
+            BETTING_PATH,
+            TEAM_PROFILES_PATH,
+        )
+    )
+
+
+@st.cache_data(show_spinner=False)
+def load_data(
+    data_signature: tuple[tuple[str, int, int], ...],
+):
+    # The signature is deliberately part of the cached function arguments.
+    # Reading remains fast, while any rebuilt CSV/JSON invalidates the cache
+    # on the next Streamlit rerun.
+    del data_signature
+    games_source = GAMES_V3_PATH if GAMES_V3_PATH.exists() and GAMES_V3_PATH.stat().st_size > 0 else GAMES_PATH
     games = safe_read_csv(games_source)
-    weekly = safe_read_csv(V3_ELO_WEEKLY_PATH if V3_ELO_WEEKLY_PATH.exists() and V3_ELO_WEEKLY_PATH.stat().st_size > 0 else ELO_WEEKLY_PATH)
+    weekly = safe_read_csv(ELO_WEEKLY_PATH)
     rankings = safe_read_csv(ELO_RANKINGS_PATH)
-    # V3 ELO is authoritative; derive the current FBS leaderboard from the
-    # same V3 weekly export used by the team pages.
-    if not weekly.empty and "elo" in weekly.columns and "team" in weekly.columns:
-        w = weekly.copy()
-        w["classification"] = w.get("classification", w.get("team_classification", "fbs"))
-        fbs = w[w["classification"].astype(str).str.casefold().eq("fbs")].copy()
-        if not fbs.empty:
-            latest_week = pd.to_numeric(fbs["week"], errors="coerce").max()
-            rankings = fbs[pd.to_numeric(fbs["week"], errors="coerce").eq(latest_week)].sort_values("elo", ascending=False).copy()
-            rankings["rank"] = rankings["elo"].rank(method="min", ascending=False).astype(int)
-    betting = safe_read_csv(V3_BETTING_PATH if V3_BETTING_PATH.exists() and V3_BETTING_PATH.stat().st_size > 0 else BETTING_PATH)
-    profiles = safe_read_csv(V3_TEAM_PROFILES_PATH if V3_TEAM_PROFILES_PATH.exists() and V3_TEAM_PROFILES_PATH.stat().st_size > 0 else TEAM_PROFILES_PATH)
+    betting = safe_read_csv(BETTING_PATH)
+    profiles = safe_read_csv(TEAM_PROFILES_PATH)
 
     performance: dict[str, Any] = {}
     if PERFORMANCE_PATH.exists() and PERFORMANCE_PATH.stat().st_size > 0:
@@ -1169,32 +1188,9 @@ def boolish(value: Any) -> bool:
 
 
 def display_value(row: pd.Series, column: str) -> Any:
-    """Return the app's authoritative display value.
-
-    V3 owns the primary forecast UI.  The overlay still carries the legacy
-    generic/V2 columns for comparison, so generic score/probability fields
-    must never silently win when a V3 forecast is present.
-    """
-    v3_column = {
-        "projected_away_score": "v3_projected_away_points",
-        "projected_home_score": "v3_projected_home_points",
-        "away_win_probability": "v3_away_win_probability",
-        "home_win_probability": "v3_home_win_probability",
-        "predicted_winner": "v3_predicted_winner",
-    }.get(column)
-    if v3_column and v3_column in row.index and pd.notna(row.get(v3_column)):
-        return row.get(v3_column)
     display_column = f"display_{column}"
     if display_column in row.index and pd.notna(row[display_column]):
         return row[display_column]
-    return row[column] if column in row.index else np.nan
-
-
-def legacy_display_value(row: pd.Series, column: str) -> Any:
-    """Explicit V2/legacy value used only in comparison panels."""
-    display_column = f"display_{column}"
-    if display_column in row.index and pd.notna(row.get(display_column)):
-        return row.get(display_column)
     return row[column] if column in row.index else np.nan
 
 
@@ -1372,10 +1368,6 @@ def elo_text(team: str, elo_lookup: dict[str, dict[str, Any]]) -> str:
 
 def predicted_winner(row: pd.Series) -> str:
     return clean(display_value(row, "predicted_winner"))
-
-
-def legacy_predicted_winner(row: pd.Series) -> str:
-    return clean(legacy_display_value(row, "predicted_winner"))
 
 
 def model_probability(row: pd.Series) -> float:
@@ -2466,13 +2458,6 @@ def render_betting_performance(betting: pd.DataFrame) -> None:
         st.info(f"No settled {bet_type.lower()} bets are available yet.")
         return
 
-    # Older V3 exports may predate the chart column. Recover it from the
-    # individual P/L rows so the UI remains backwards-compatible.
-    if "cumulative_profit_loss" not in view.columns:
-        view["cumulative_profit_loss"] = pd.to_numeric(
-            view.get("profit_loss", 0), errors="coerce"
-        ).fillna(0.0).cumsum()
-
     stake = pd.to_numeric(view["stake"], errors="coerce").fillna(0.0)
     profit_loss = pd.to_numeric(view["profit_loss"], errors="coerce").fillna(0.0)
     total_staked = float(stake.sum())
@@ -2523,12 +2508,12 @@ def render_betting_performance(betting: pd.DataFrame) -> None:
 
     with st.expander("Bet history"):
         history_columns = [c for c in [
-            "bet_number", "week", "away_team", "home_team", "selection", "bet_team", "market_line",
+            "bet_number", "week", "away_team", "home_team", "bet_team", "market_line",
             "market_odds", "result", "profit_loss", "cumulative_profit_loss", "source_type"
         ] if c in view.columns]
         history = view[history_columns].rename(columns={
             "bet_number": "Bet", "week": "Week", "away_team": "Away", "home_team": "Home",
-            "selection": "Selection", "bet_team": "Model Bet", "market_line": "Line / Odds", "market_odds": "Price",
+            "bet_team": "Model Bet", "market_line": "Line / Odds", "market_odds": "Price",
             "result": "Result", "profit_loss": "P/L £", "cumulative_profit_loss": "Running P/L £",
             "source_type": "Source",
         })
@@ -3341,18 +3326,6 @@ def team_game_rows(team: str, games: pd.DataFrame) -> pd.DataFrame:
     return games[first_text(games,["home_team"]).eq(team)|first_text(games,["away_team"]).eq(team)].sort_values("start_date_utc",kind="stable")
 
 
-def live_team_record(team: str, games: pd.DataFrame) -> str:
-    """Calculate the displayed record from refreshed canonical final scores."""
-    rows = team_game_rows(team, games); wins = losses = 0
-    for _, row in rows.iterrows():
-        away, home = get_actual_score(row, "away"), get_actual_score(row, "home")
-        if pd.isna(away) or pd.isna(home): continue
-        is_home = clean(row.get("home_team")) == team
-        own, opp = (home, away) if is_home else (away, home)
-        wins += int(float(own) > float(opp)); losses += int(float(own) < float(opp))
-    return f"{wins}-{losses}"
-
-
 def render_team_v3(games: pd.DataFrame, weekly: pd.DataFrame, profiles: pd.DataFrame, rankings: pd.DataFrame) -> None:
     teams=team_universe(games,weekly,profiles)
     if not teams:
@@ -3373,7 +3346,7 @@ def render_team_v3(games: pd.DataFrame, weekly: pd.DataFrame, profiles: pd.DataF
         candidate=team_games.iloc[0];logo=clean(candidate.get("home_logo_url" if clean(candidate.get("home_team"))==selected else "away_logo_url",""))
     conference=clean(profile.get("conference",latest.get("conference","")))
     rank_val=profile.get("model_rank",latest.get("rank",np.nan));rank_text=f'#{int(float(rank_val))}' if pd.notna(rank_val) else "—"
-    elo=profile.get("current_elo",latest.get("elo",np.nan));record=live_team_record(selected, games);delta=profile.get("recent_elo_change",latest.get("elo_change",np.nan))
+    elo=profile.get("current_elo",latest.get("elo",np.nan));record=clean(profile.get("record","—")) or "—";delta=profile.get("recent_elo_change",latest.get("elo_change",np.nan))
     banner_colour="#d71920" if selected=="Georgia" else "#1d8fd1"
     if not team_games.empty:
         sample=team_games.iloc[0];side="home" if clean(sample.get("home_team"))==selected else "away";banner_colour=team_colour(sample,side,banner_colour)
@@ -3505,32 +3478,30 @@ def render_elo_v3(weekly: pd.DataFrame, rankings: pd.DataFrame, profiles: pd.Dat
 
 def render_tracker_v3(games: pd.DataFrame, performance: dict[str, Any]) -> None:
     page_heading("PREDICTIONS","Official Prediction Tracker","Locked before kickoff. Audited after the final whistle.","Immutable lifecycle")
-    evaluated=completed_analysis(games)
-    usable=evaluated[evaluated["_v3_home_prob"].notna()] if not evaluated.empty else evaluated
-    accuracy=float(usable["_v3_correct"].mean()) if len(usable) else None
-    brier=float(np.mean((usable["_v3_home_prob"]-usable["_home_won"])**2)) if len(usable) else None
+    official=performance.get("official_locked",{}) if performance else {};evaluated=completed_analysis(games)
+    accuracy=official.get("accuracy");brier=official.get("brier")
+    if brier is None and not evaluated.empty:
+        usable=evaluated[evaluated["_v2_home_prob"].notna()];brier=float(np.mean((usable["_v2_home_prob"]-usable["_home_won"])**2)) if len(usable) else None
     locks=int(games["is_locked"].apply(boolish).sum()) if "is_locked" in games.columns else 0
     streak="—"
     if not evaluated.empty:
-        ordered=usable.sort_values([c for c in ["start_date_utc","cfbd_game_id"] if c in usable.columns]);last=bool(ordered.iloc[-1]["_v3_correct"]);n=0
-        for value in ordered["_v3_correct"].iloc[::-1]:
+        ordered=evaluated.sort_values([c for c in ["start_date_utc","cfbd_game_id"] if c in evaluated.columns]);last=bool(ordered.iloc[-1]["_v2_correct"]);n=0
+        for value in ordered["_v2_correct"].iloc[::-1]:
             if bool(value)==last:n+=1
             else:break
         streak=f'{"W" if last else "L"}{n}'
-    record=f'{int(usable["_v3_correct"].sum())}-{int(len(usable)-usable["_v3_correct"].sum())}' if len(usable) else "—"
-    kpi_html([("V3 record",record,f'{len(usable):,} settled V3 forecasts',"cyan"),("Accuracy",pct(accuracy),"V3 predictions","green"),("Brier score",num(brier,3),"Lower is better","purple"),("Current streak",streak,"Most recent results","amber"),("V3 locks made",f"{locks:,}","Immutable V3 locks","")])
+    kpi_html([("Official record",official.get("record") or "—",f'{official.get("games",0)} settled locks',"cyan"),("Accuracy",pct(accuracy),"Official predictions","green"),("Brier score",num(brier,3),"Lower is better","purple"),("Current streak",streak,"Most recent results","amber"),("Locks made",f"{locks:,}","Current export","")])
     f1,f2,f3,f4=st.columns(4)
     with f1:week=st.selectbox("Week",game_week_options(games),key="tracker_v3_week")
     with f2:status=st.selectbox("Status",["All","Official locks","Completed","Upcoming"],key="tracker_v3_status")
     with f3:confidence=st.selectbox("Confidence",["All"]+CONFIDENCE_ORDER,key="tracker_v3_conf")
-    with f4:model=st.selectbox("Model",["V3 production","Both","V2 comparison","Disagreements"],key="tracker_v3_model")
+    with f4:model=st.selectbox("Model",["Both","V2 production","V3 challenger","Disagreements"],key="tracker_v3_model")
     query=st.text_input("Search tracker",placeholder="Search either team…",key="tracker_v3_search").strip().lower()
     view=games.copy()
     if week!="All":view=view[pd.to_numeric(view["week"],errors="coerce").eq(int(week))]
     view=view[status_mask(view,status)]
     if confidence!="All":view=view[first_text(view,["confidence_bucket"]).eq(confidence)]
-    if model=="V3 production":view=view[pd.to_numeric(view.get("v3_home_win_probability"),errors="coerce").notna()]
-    elif model=="V2 comparison":view=view[pd.to_numeric(view.get("home_win_probability"),errors="coerce").notna() & pd.to_numeric(view.get("v3_home_win_probability"),errors="coerce").isna()]
+    if model=="V3 challenger":view=view[pd.to_numeric(view.get("v3_home_win_probability"),errors="coerce").notna()]
     elif model=="Disagreements":view=view[view.apply(lambda r:v3_available(r) and v3_winner(r)!=predicted_winner(r),axis=1)]
     if query:view=view[first_text(view,["home_team"]).str.lower().str.contains(query,regex=False)|first_text(view,["away_team"]).str.lower().str.contains(query,regex=False)]
     view=view.sort_values([c for c in ["start_date_utc","cfbd_game_id"] if c in view.columns],kind="stable")
@@ -3539,7 +3510,7 @@ def render_tracker_v3(games: pd.DataFrame, performance: dict[str, Any]) -> None:
         a=get_actual_score(row,"away");h=get_actual_score(row,"home");final=f'{num(a,0)}–{num(h,0)}' if pd.notna(a) and pd.notna(h) else "—"
         actual=""
         if pd.notna(a) and pd.notna(h):actual=clean(row.get("away_team" if float(a)>float(h) else "home_team"))
-        rows.append({"ID":row_game_id(row),"Week":row.get("week"),"Matchup":f'{clean(row.get("away_team"))} @ {clean(row.get("home_team"))}',"Lock":lock_text(row),"V3 Pick":v3_winner(row),"V3 %":game_confidence(row,"v3"),"V2 Pick":legacy_predicted_winner(row),"V2 %":game_confidence(row),"Projected":f'{num(display_value(row,"projected_away_score"),0)}–{num(display_value(row,"projected_home_score"),0)}',"Final":final,"Result":"WIN" if actual and v3_winner(row)==actual else "LOSS" if actual else "PENDING","Confidence":clean(row.get("confidence_bucket"))})
+        rows.append({"ID":row_game_id(row),"Week":row.get("week"),"Matchup":f'{clean(row.get("away_team"))} @ {clean(row.get("home_team"))}',"Lock":lock_text(row),"V2 Pick":predicted_winner(row),"V2 %":game_confidence(row),"V3 Pick":v3_winner(row),"V3 %":game_confidence(row,"v3"),"Projected":f'{num(display_value(row,"projected_away_score"),0)}–{num(display_value(row,"projected_home_score"),0)}',"Final":final,"Result":"WIN" if actual and predicted_winner(row)==actual else "LOSS" if actual else "PENDING","Confidence":clean(row.get("confidence_bucket"))})
     table=pd.DataFrame(rows)
     left,right=st.columns([1.8,1])
     with left:
@@ -3904,7 +3875,7 @@ def render_exact_matchup(games: pd.DataFrame) -> None:
     if tab=="overview":
         metrics=[("Pregame ELO","away_pregame_elo","home_pregame_elo",False),("Success Rate","matchup_away_success_rate","matchup_home_success_rate",True),("Explosive Rate","matchup_away_explosive_rate","matchup_home_explosive_rate",True),("PPA","matchup_away_ppa","matchup_home_ppa",False),("Points / Drive","matchup_away_ppd","matchup_home_ppd",False),("Matchup Ratio","matchup_away_matchup_ratio","matchup_home_matchup_ratio",False)]
         v3signal,_=v3_signal(row)
-        model_v2=f'<div class="x-panel-body"><div class="x-eyebrow">V2 PRODUCTION MODEL</div><div class="x-kpi-value">{num(legacy_display_value(row,"projected_away_score"),0)}–{num(legacy_display_value(row,"projected_home_score"),0)}</div><div class="x-kpi-note">{html.escape(legacy_predicted_winner(row))} · {pct(game_confidence(row))}</div><span class="x-chip green">CONTROL</span></div>'
+        model_v2=f'<div class="x-panel-body"><div class="x-eyebrow">V2 PRODUCTION MODEL</div><div class="x-kpi-value">{num(display_value(row,"projected_away_score"),0)}–{num(display_value(row,"projected_home_score"),0)}</div><div class="x-kpi-note">{html.escape(predicted_winner(row))} · {pct(game_confidence(row))}</div><span class="x-chip green">CONTROL</span></div>'
         model_v3=f'<div class="x-panel-body"><div class="x-eyebrow" style="color:#b78dff">V3 DRIVE MODEL</div><div class="x-kpi-value">{num(row.get("v3_projected_away_points"),0)}–{num(row.get("v3_projected_home_points"),0)}</div><div class="x-kpi-note">{html.escape(v3_winner(row) or "Awaiting forecast")} · {pct(game_confidence(row,"v3"))}</div><span class="x-chip purple">{html.escape(v3signal)}</span></div>'
         score_values=[row.get("simulation_away_score_p10"),display_value(row,"projected_away_score"),row.get("simulation_away_score_p90"),row.get("simulation_home_score_p10"),display_value(row,"projected_home_score"),row.get("simulation_home_score_p90")]
         st.markdown(f'<div class="x-model-grid">{exact_panel("WHY THE MODEL LEANS "+(predicted_winner(row) or "THIS WAY"),stat_comparison_rows(row,away,home,metrics))}{exact_panel("V2 PRODUCTION",model_v2)}{exact_panel("V3 DRIVE MODEL",model_v3)}{exact_panel("PROJECTED SCORING DISTRIBUTION",svg_line([float(v) for v in score_values if pd.notna(v)],"#ff3858",150))}</div>',unsafe_allow_html=True)
@@ -3951,14 +3922,8 @@ def render_exact_team(games: pd.DataFrame, weekly: pd.DataFrame, profiles: pd.Da
     if not logo and not team_games.empty:
         sample=team_games.iloc[0];logo=clean(sample.get("home_logo_url" if clean(sample.get("home_team"))==team else "away_logo_url",""))
     sample=team_games.iloc[0] if not team_games.empty else pd.Series(dtype=object);side="home" if not sample.empty and clean(sample.get("home_team"))==team else "away";colour=team_colour(sample,side,"#1c9bd1") if not sample.empty else "#1c9bd1"
-    rank=profile_value(profile,["model_rank"],latest.get("rank",np.nan));elo=profile_value(profile,["current_elo"],latest.get("elo",np.nan));record=live_team_record(team, games);delta=profile_value(profile,["recent_elo_change"],latest.get("elo_change",np.nan));conference=clean(profile.get("conference",latest.get("conference","")))
-    # Upcoming means no authoritative final score, not merely a particular
-    # status label (V3 uses both `final` and `completed` across exports).
-    ah = pd.to_numeric(team_games.get("actual_home_points"), errors="coerce")
-    aa = pd.to_numeric(team_games.get("actual_away_points"), errors="coerce")
-    upcoming = team_games[ah.isna() | aa.isna()].sort_values("start_date_utc", kind="stable")
-    next_game = upcoming.iloc[0] if not upcoming.empty else pd.Series(dtype=object)
-    opponent = clean(next_game.get("away_team" if clean(next_game.get("home_team")) == team else "home_team", "")) if not next_game.empty else "TBD"
+    rank=profile_value(profile,["model_rank"],latest.get("rank",np.nan));elo=profile_value(profile,["current_elo"],latest.get("elo",np.nan));record=clean(profile.get("record","—")) or "—";delta=profile_value(profile,["recent_elo_change"],latest.get("elo_change",np.nan));conference=clean(profile.get("conference",latest.get("conference","")))
+    upcoming=team_games[~first_text(team_games,["game_status"]).str.lower().eq("completed")];next_game=upcoming.iloc[0] if not upcoming.empty else pd.Series(dtype=object);opponent=clean(next_game.get("away_team" if clean(next_game.get("home_team"))==team else "home_team","")) if not next_game.empty else "TBD"
     st.markdown(f'<section class="x-team-hero" style="--team:{colour};--team-soft:{colour}77"><div class="x-team-hero-grid">{exact_logo(logo,team)}<div><div class=x-eyebrow>{html.escape(conference or "TEAM INTELLIGENCE")}</div><div class=x-team-name>{html.escape(team.upper())}</div><div class=x-sub>Production strength · form · matchup identity</div></div><div class=x-team-kpis><div class=x-team-kpi><span>Record</span><strong>{html.escape(record)}</strong></div><div class=x-team-kpi><span>ELO rank</span><strong>#{num(rank,0)}</strong></div><div class=x-team-kpi><span>ELO trend</span><strong style="color:#48e09b">{signed(delta,0)}</strong></div><div class=x-team-kpi><span>Next game</span><strong style="font-size:.72rem">vs {html.escape(opponent)}</strong></div></div></div></section>',unsafe_allow_html=True)
     tabs=[("overview","Overview"),("schedule","Schedule"),("offense","Offense"),("defense","Defense"),("drives","Drives"),("trends","Trends")];tab=query_value("tab","overview");tab=tab if tab in dict(tabs) else "overview";exact_tabs("team",tabs,tab,team=team)
     metric_defs=[("Offensive Rating",profile.get("offensive_rating"),"#4"),("Defensive Rating",profile.get("defensive_rating"),"#7"),("Success Rate",profile.get("success_rate"),"Efficiency"),("Explosive Rate",profile.get("explosive_rate"),"Big plays"),("Turnover Margin",profile.get("turnover_margin"),"Possessions"),("Strength of Schedule",profile.get("schedule_strength_rank"),clean(profile.get("schedule_strength_label",""))),("Recent Form",record,"2026")]
@@ -4020,13 +3985,12 @@ def render_exact_elo(weekly: pd.DataFrame, profiles: pd.DataFrame) -> None:
 
 
 def render_exact_tracker(games: pd.DataFrame, performance: dict[str,Any]) -> None:
-    evaluated=completed_analysis(games);locks=int(games["is_locked"].apply(boolish).sum()) if "is_locked" in games.columns else 0
-    usable=evaluated[evaluated["_v3_home_prob"].notna()] if not evaluated.empty else evaluated
-    accuracy=float(usable["_v3_correct"].mean()) if len(usable) else np.nan
-    brier=float(np.mean((usable["_v3_home_prob"]-usable["_home_won"])**2)) if len(usable) else np.nan
+    official=performance.get("official_locked",{}) if performance else {};evaluated=completed_analysis(games);locks=int(games["is_locked"].apply(boolish).sum()) if "is_locked" in games.columns else 0
+    accuracy=official.get("accuracy");brier=official.get("brier")
+    if brier is None and not evaluated.empty:
+        usable=evaluated[evaluated["_v2_home_prob"].notna()];brier=float(np.mean((usable["_v2_home_prob"]-usable["_home_won"])**2)) if len(usable) else np.nan
     st.markdown('<div class=x-page-head><div><div class=x-eyebrow>PREDICTIONS</div><div class=x-h1>OFFICIAL PREDICTION TRACKER</div><div class=x-sub>Locked before kickoff. Audited after the final whistle.</div></div><span class="x-chip green"><i class=x-online></i>AUDIT ACTIVE</span></div>',unsafe_allow_html=True)
-    record=f'{int(usable["_v3_correct"].sum())}-{int(len(usable)-usable["_v3_correct"].sum())}' if len(usable) else "—"
-    st.markdown('<div class=x-analytics-kpis>'+"".join(f'<div class="x-kpi {tone}"><div class=x-kpi-label>{label}</div><div class=x-kpi-value>{value}</div><div class=x-kpi-note>{note}</div></div>' for label,value,note,tone in [("V3 Record",record,f'{len(usable)} settled forecasts',""),("Accuracy",pct(accuracy),"V3 correct picks","green"),("Brier Score",num(brier,3),"Lower is better","purple"),("V3 Locks Made",f"{locks:,}","Immutable this season","amber")])+'</div>',unsafe_allow_html=True)
+    st.markdown('<div class=x-analytics-kpis>'+"".join(f'<div class="x-kpi {tone}"><div class=x-kpi-label>{label}</div><div class=x-kpi-value>{value}</div><div class=x-kpi-note>{note}</div></div>' for label,value,note,tone in [("Official Record",official.get("record") or "—",f'{official.get("games",0)} settled',""),("Accuracy",pct(accuracy),"Correct picks","green"),("Brier Score",num(brier,3),"Lower is better","purple"),("Locks Made",f"{locks:,}","This season","amber")])+'</div>',unsafe_allow_html=True)
     c1,c2,c3,c4=st.columns(4)
     with c1:week=st.selectbox("Week",game_week_options(games),key="x_track_week")
     with c2:status=st.selectbox("Status",["All","Official locks","Completed","Upcoming"],key="x_track_status")
@@ -4107,7 +4071,9 @@ def render_exact_more(games: pd.DataFrame, rankings: pd.DataFrame, performance: 
 # ============================================================
 
 
-games, weekly, rankings, performance, betting, profiles = load_data()
+games, weekly, rankings, performance, betting, profiles = load_data(
+    app_data_signature()
+)
 
 if games.empty:
     st.error("App data has not been built.")

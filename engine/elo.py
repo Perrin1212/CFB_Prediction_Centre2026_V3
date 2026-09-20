@@ -25,6 +25,11 @@ class EloConfig:
 
     starting_rating: float = 1500.0
 
+    # Cross-division holdout testing on the project's historical universe
+    # supports a materially lower prior for a previously unseen FCS team.
+    # Established FCS teams can still earn their way above this value.
+    fcs_starting_rating: float = 1100.0
+
     home_field_advantage: float = 55.0
 
     k_factor: float = 22.0
@@ -86,6 +91,7 @@ class EloEngine:
         )
 
         self.ratings: Dict[str, float] = {}
+        self.classifications: Dict[str, str] = {}
 
     # ========================================================
     # BASIC RATING ACCESS
@@ -94,17 +100,42 @@ class EloEngine:
     def reset(self) -> None:
 
         self.ratings = {}
+        self.classifications = {}
+
+    @staticmethod
+    def _normalise_classification(
+        classification: str | None,
+    ) -> str:
+        value = str(classification or "").strip().casefold()
+        return value if value in {"fbs", "fcs"} else ""
+
+    def _prior_for_classification(
+        self,
+        classification: str | None,
+    ) -> float:
+        return (
+            self.config.fcs_starting_rating
+            if self._normalise_classification(classification) == "fcs"
+            else self.config.starting_rating
+        )
 
     def get_rating(
         self,
         team: str,
+        classification: str | None = None,
     ) -> float:
+
+        team = str(team).strip()
+        normalised_class = self._normalise_classification(classification)
+
+        if normalised_class:
+            self.classifications[team] = normalised_class
 
         if team not in self.ratings:
 
             self.ratings[
                 team
-            ] = self.config.starting_rating
+            ] = self._prior_for_classification(normalised_class)
 
         return self.ratings[
             team
@@ -361,10 +392,6 @@ class EloEngine:
         self,
     ) -> None:
 
-        mean = (
-            self.config.starting_rating
-        )
-
         regression = (
             self.config.preseason_regression
         )
@@ -377,6 +404,10 @@ class EloEngine:
                 self.ratings[
                     team
                 ]
+            )
+
+            mean = self._prior_for_classification(
+                self.classifications.get(team)
             )
 
             new_rating = (
@@ -412,11 +443,13 @@ class EloEngine:
     ) -> dict:
 
         home_pre = self.get_rating(
-            home_team
+            home_team,
+            home_classification,
         )
 
         away_pre = self.get_rating(
-            away_team
+            away_team,
+            away_classification,
         )
 
         expected_home = (

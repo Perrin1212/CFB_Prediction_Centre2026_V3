@@ -141,8 +141,14 @@ def main() -> None:
 
     rows: list[dict] = []
     for row in future.itertuples(index=False):
-        home_state = engine.snapshot(row.home_team)
-        away_state = engine.snapshot(row.away_team)
+        home_state = engine.snapshot(
+            row.home_team,
+            _classification(row, "home"),
+        )
+        away_state = engine.snapshot(
+            row.away_team,
+            _classification(row, "away"),
+        )
         matchup = build_matchup(home_state, away_state, bool(getattr(row, "neutral_site", False)))
         seed = SETTINGS.seed + int(row.game_id) % 100_000
         prediction = predict_from_matchup(matchup, bundle, args.simulations, seed)

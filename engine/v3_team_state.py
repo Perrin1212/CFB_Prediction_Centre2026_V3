@@ -73,6 +73,10 @@ class TeamState:
 
     elo: float = 1500.0
 
+    # Persist division identity so offseason regression returns teams to the
+    # correct population prior rather than treating FBS and FCS as identical.
+    classification: str = ""
+
     schedule_off: float = 100.0
     schedule_def: float = 100.0
 
@@ -95,6 +99,9 @@ class StateConfig:
     opponent_ceiling: float = 1.32
 
     preseason_regression: float = 0.42
+
+    fbs_elo_prior: float = 1500.0
+    fcs_elo_prior: float = 1100.0
 
     elo_k: float = 28.0
     elo_hfa: float = 75.0
@@ -127,11 +134,39 @@ class ChronologicalStateEngine:
     def get(
         self,
         team,
+        classification: str | None = None,
     ) -> TeamState:
-        return self.states.setdefault(
-            str(team).strip(),
-            TeamState(),
-        )
+        key = str(team).strip()
+        cls = str(classification or "").strip().casefold()
+        cls = cls if cls in {"fbs", "fcs"} else ""
+
+        if key not in self.states:
+            prior = (
+                self.cfg.fcs_elo_prior
+                if cls == "fcs"
+                else self.cfg.fbs_elo_prior
+            )
+            self.states[key] = TeamState(
+                elo=prior,
+                classification=cls,
+            )
+        elif cls:
+            state = self.states[key]
+            # Correct a neutral placeholder if classification arrives before
+            # the team has supplied any observations or rating movement.
+            if (
+                not state.classification
+                and state.games == 0
+                and abs(state.elo - self.cfg.fbs_elo_prior) < 1e-9
+            ):
+                state.elo = (
+                    self.cfg.fcs_elo_prior
+                    if cls == "fcs"
+                    else self.cfg.fbs_elo_prior
+                )
+            state.classification = cls
+
+        return self.states[key]
 
     def regress_season(
         self,
@@ -160,9 +195,15 @@ class ChronologicalStateEngine:
                 side.current_values = {}
                 side.n = 0
 
+            elo_prior = (
+                self.cfg.fcs_elo_prior
+                if s.classification == "fcs"
+                else self.cfg.fbs_elo_prior
+            )
+
             s.elo = (
                 (1 - r) * s.elo
-                + r * 1500.0
+                + r * elo_prior
             )
 
             s.schedule_off = (
@@ -328,12 +369,13 @@ class ChronologicalStateEngine:
     def snapshot(
         self,
         team,
+        classification: str | None = None,
     ) -> dict:
         """
         Return the complete PRE-GAME state used by matchup construction.
         """
 
-        s = self.get(team)
+        s = self.get(team, classification)
 
         maturity = self.current_season_weight(s.games)
 
@@ -345,6 +387,7 @@ class ChronologicalStateEngine:
             "schedule_off": s.schedule_off,
             "schedule_def": s.schedule_def,
             "maturity": maturity,
+            "division_level": 0.0 if s.classification == "fcs" else 1.0,
         }
 
         out.update(
@@ -655,8 +698,8 @@ class ChronologicalStateEngine:
         - possession-state maturity
         """
 
-        hs = self.get(home)
-        as_ = self.get(away)
+        hs = self.get(home, home_classification)
+        as_ = self.get(away, away_classification)
 
         # Capture PRE-GAME quality ratings.
         home_off_rating = self.offense_rating(
@@ -784,8 +827,8 @@ class ChronologicalStateEngine:
         pretending the actual game result never happened.
         """
 
-        hs = self.get(home)
-        as_ = self.get(away)
+        hs = self.get(home, home_classification)
+        as_ = self.get(away, away_classification)
 
         # Capture PRE-GAME opponent quality.
         home_off_rating = self.offense_rating(

@@ -32,6 +32,7 @@ def build_matchup(home:dict,away:dict,neutral:bool=False)->dict[str,float]:
     env=(out["home_drives"]+out["away_drives"])/2
     out["home_drives"]=.72*out["home_drives"]+.28*env;out["away_drives"]=.72*out["away_drives"]+.28*env
     out["elo_difference"]=_g(home,"elo",1500)-_g(away,"elo",1500)+(0 if neutral else 75)
+    out["division_difference"]=_g(home,"division_level",1)-_g(away,"division_level",1)
     out["rating_difference"]=(home.get("off_rating",100)+home.get("def_rating",100))-(away.get("off_rating",100)+away.get("def_rating",100))
     out["home_field_points"]=hfa
     out["state_maturity"]=min(_g(home,"maturity",0),_g(away,"maturity",0))
@@ -41,4 +42,4 @@ V3_MATCHUP_FEATURES=[
  "home_drives","away_drives","home_ppd","away_ppd","home_td_rate","away_td_rate","home_fg_rate","away_fg_rate","home_turnover_rate","away_turnover_rate",
  "home_start_field","away_start_field","home_success_rate","away_success_rate","home_ppa","away_ppa","home_explosive_rate","away_explosive_rate",
  "home_yards_per_drive","away_yards_per_drive","home_plays_per_drive","away_plays_per_drive","home_third_down_rate","away_third_down_rate",
- "home_matchup_ratio","away_matchup_ratio","elo_difference","rating_difference","home_field_points","state_maturity"]
+ "home_matchup_ratio","away_matchup_ratio","elo_difference","division_difference","rating_difference","home_field_points","state_maturity"]

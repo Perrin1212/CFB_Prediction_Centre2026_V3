@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from statistics import NormalDist
 from typing import Any
 
 import numpy as np
@@ -18,6 +19,7 @@ MARKET_DIR = DATA_DIR / "market"
 PREDICTIONS_DIR = DATA_DIR / "predictions"
 
 V2_GAMES = APP_DIR / "games.csv"
+V3_GAMES = APP_DIR / "games_v3.csv"
 
 # IMPORTANT:
 # The app-facing games.csv is intentionally presentation-oriented and
@@ -34,6 +36,16 @@ SCORING_COMPLETED = (
     / "2026_completed_scoring_predictions.csv"
 )
 
+# V3 is the authoritative live-season result source.  The V2 score output is
+# retained when available, but a weekly V3-only production refresh must still
+# be able to settle betting rows from official CFBD finals.
+V3_CANONICAL_RESULTS = (
+    DATA_DIR
+    / "processed"
+    / "v3"
+    / "games.csv"
+)
+
 MARKET_CURRENT = MARKET_DIR / "market_lines_current.csv"
 MARKET_HISTORY = MARKET_DIR / "market_lines_history.csv"
 
@@ -41,6 +53,15 @@ OUT_FILE = APP_DIR / "betting_performance.csv"
 
 BET_STAKE = 100.0
 ATS_AMERICAN_ODDS = -110.0
+MONEYLINE_MIN_AMERICAN_ODDS = -350.0
+MONEYLINE_MAX_AMERICAN_ODDS = 350.0
+MONEYLINE_MIN_MODEL_CONFIDENCE = 0.60
+ATS_MIN_COVER_PROBABILITY = 0.55
+MONEYLINE_SELECTION_RULE = (
+    "moneyline_odds_-350_to_+350_and_"
+    "win_probability_at_least_60pct"
+)
+ATS_SELECTION_RULE = "ats_cover_probability_at_least_55pct"
 
 
 # ============================================================
@@ -88,6 +109,51 @@ def safe_float(
     return None
 
 
+def safe_probability(
+    value: Any,
+) -> float | None:
+
+    number = safe_float(value)
+
+    if number is None:
+        return None
+
+    # Support both canonical decimal probabilities and legacy percentage
+    # displays without silently accepting invalid values.
+    if number > 1.0 and number <= 100.0:
+        number /= 100.0
+
+    if 0.0 <= number <= 1.0:
+        return number
+
+    return None
+
+
+def model_confidence_for_pick(
+    game: pd.Series,
+    *,
+    model_home: bool,
+) -> float | None:
+
+    side = "home" if model_home else "away"
+    candidates = [
+        f"display_{side}_win_probability",
+        f"locked_{side}_win_probability",
+        f"{side}_win_probability",
+        "model_favourite_probability",
+        "prediction_probability",
+    ]
+
+    for column in candidates:
+        probability = safe_probability(
+            game.get(column)
+        )
+        if probability is not None:
+            return probability
+
+    return None
+
+
 def clean(
     value: Any,
 ) -> str:
@@ -128,6 +194,118 @@ def american_profit(
         return stake * odds / 100.0
 
     return stake * 100.0 / abs(odds)
+
+
+def first_number(
+    row: pd.Series,
+    candidates: list[str],
+) -> float | None:
+    """Return the first finite numeric value available on a game row."""
+    for column in candidates:
+        number = safe_float(row.get(column))
+        if number is not None:
+            return number
+    return None
+
+
+def projected_home_margin_and_sd(
+    game: pd.Series,
+) -> tuple[float | None, float | None]:
+    """Recover the simulated home-margin distribution from the app schema."""
+    mean = first_number(
+        game,
+        [
+            "sim_projected_margin",
+            "v3_projected_margin",
+            "display_final_expected_home_margin",
+            "locked_final_expected_home_margin",
+            "final_expected_home_margin",
+        ],
+    )
+
+    if mean is None:
+        home_points = first_number(
+            game,
+            [
+                "display_projected_home_score",
+                "locked_projected_home_score",
+                "projected_home_score",
+            ],
+        )
+        away_points = first_number(
+            game,
+            [
+                "display_projected_away_score",
+                "locked_projected_away_score",
+                "projected_away_score",
+            ],
+        )
+        if home_points is not None and away_points is not None:
+            mean = home_points - away_points
+
+    margin_p10 = first_number(game, ["sim_margin_p10", "simulation_margin_p10"])
+    margin_p90 = first_number(game, ["sim_margin_p90", "simulation_margin_p90"])
+    sd: float | None = None
+
+    # The V3 Monte Carlo output publishes the 10th and 90th percentiles of
+    # home margin.  Their width is approximately 2.5631 standard deviations,
+    # allowing the captured market spread to be evaluated independently from
+    # the straight-up winner probability.
+    if (
+        margin_p10 is not None
+        and margin_p90 is not None
+        and margin_p90 > margin_p10
+    ):
+        sd = (margin_p90 - margin_p10) / 2.5631031311
+
+    if sd is None:
+        home_sd = first_number(game, ["home_score_residual_sd_pre"])
+        away_sd = first_number(game, ["away_score_residual_sd_pre"])
+        correlation = first_number(game, ["score_residual_correlation_pre"])
+        if home_sd is not None and away_sd is not None:
+            correlation = 0.0 if correlation is None else correlation
+            variance = (
+                home_sd**2
+                + away_sd**2
+                - 2.0 * correlation * home_sd * away_sd
+            )
+            if variance > 0:
+                sd = float(np.sqrt(variance))
+
+    return mean, sd
+
+
+def ats_projection(
+    game: pd.Series,
+    home_spread: float,
+) -> dict[str, float | bool] | None:
+    """Choose the projected cover side and calculate its cover probability."""
+    mean, sd = projected_home_margin_and_sd(game)
+    if mean is None or sd is None or sd <= 0:
+        return None
+
+    home_edge = mean + home_spread
+    home_cover_probability = float(
+        NormalDist().cdf(home_edge / sd)
+    )
+    home_cover_probability = float(
+        np.clip(home_cover_probability, 0.0, 1.0)
+    )
+    bet_home = home_cover_probability >= 0.5
+    selected_probability = (
+        home_cover_probability
+        if bet_home
+        else 1.0 - home_cover_probability
+    )
+
+    return {
+        "bet_home": bet_home,
+        "cover_probability": selected_probability,
+        "home_cover_probability": home_cover_probability,
+        "projected_home_margin": mean,
+        "margin_sd": sd,
+        "edge_points": abs(home_edge),
+    }
 
 
 def game_id_column(
@@ -179,102 +357,91 @@ def load_market_history() -> pd.DataFrame:
 
 def load_scoring_results() -> pd.DataFrame:
     """
-    Load V2's own scoring output and expose one result row per game.
+    Load authoritative completed results and expose one row per game.
 
-    The scoring pipeline writes actual_home_points / actual_away_points
-    only for completed games, so these fields are the correct V2-native
-    settlement source.
+    V2 scoring output remains supported for backwards compatibility.  V3's
+    canonical CFBD schedule is loaded afterwards and therefore takes
+    precedence whenever both sources contain the same game.
     """
 
-    path = (
-        SCORING_ALL
-        if SCORING_ALL.exists()
-        else SCORING_COMPLETED
-    )
+    sources: list[tuple[str, Path]] = []
 
-    if not path.exists():
+    if SCORING_ALL.exists():
+        sources.append(("v2_scoring", SCORING_ALL))
+    elif SCORING_COMPLETED.exists():
+        sources.append(("v2_scoring", SCORING_COMPLETED))
 
+    if V3_CANONICAL_RESULTS.exists():
+        sources.append(("v3_canonical_cfbd", V3_CANONICAL_RESULTS))
+
+    if not sources:
         raise FileNotFoundError(
-            "Could not find V2 scoring predictions.\n"
-            f"Expected:\n{SCORING_ALL}\n"
-            f"or:\n{SCORING_COMPLETED}"
+            "Could not find an authoritative scoring result source.\n"
+            f"Expected V2 scoring at:\n{SCORING_ALL}\n"
+            f"or V3 canonical results at:\n{V3_CANONICAL_RESULTS}"
         )
 
-    scoring = pd.read_csv(
-        path,
-        low_memory=False,
-    )
+    normalised: list[pd.DataFrame] = []
 
-    if scoring.empty:
-        return scoring
+    for source_name, path in sources:
+        frame = pd.read_csv(path, low_memory=False)
+        if frame.empty:
+            continue
 
-    scoring_id = game_id_column(
-        scoring
-    )
-
-    scoring = scoring.copy()
-
-    scoring["_game_id"] = pd.to_numeric(
-        scoring[scoring_id],
-        errors="coerce",
-    ).astype("Int64")
-
-    home_score_col = pick_col(
-        scoring,
-        [
-            "actual_home_points",
-            "final_home_score",
-            "home_points",
-        ],
-    )
-
-    away_score_col = pick_col(
-        scoring,
-        [
-            "actual_away_points",
-            "final_away_score",
-            "away_points",
-        ],
-    )
-
-    if (
-        home_score_col is None
-        or away_score_col is None
-    ):
-
-        raise RuntimeError(
-            "V2 scoring predictions do not contain usable "
-            "actual-score columns.\n"
-            f"Available columns: "
-            f"{', '.join(map(str, scoring.columns))}"
+        scoring_id = game_id_column(frame)
+        home_score_col = pick_col(
+            frame,
+            [
+                "actual_home_points",
+                "final_home_score",
+                "home_points",
+            ],
+        )
+        away_score_col = pick_col(
+            frame,
+            [
+                "actual_away_points",
+                "final_away_score",
+                "away_points",
+            ],
         )
 
-    scoring["_actual_home_score"] = pd.to_numeric(
-        scoring[home_score_col],
-        errors="coerce",
-    )
+        if home_score_col is None or away_score_col is None:
+            raise RuntimeError(
+                f"{source_name} does not contain usable actual-score "
+                "columns.\n"
+                f"Available columns: {', '.join(map(str, frame.columns))}"
+            )
 
-    scoring["_actual_away_score"] = pd.to_numeric(
-        scoring[away_score_col],
-        errors="coerce",
-    )
+        result = frame.copy()
+        result["_game_id"] = pd.to_numeric(
+            result[scoring_id], errors="coerce"
+        ).astype("Int64")
+        result["_actual_home_score"] = pd.to_numeric(
+            result[home_score_col], errors="coerce"
+        )
+        result["_actual_away_score"] = pd.to_numeric(
+            result[away_score_col], errors="coerce"
+        )
+        result["_result_source"] = source_name
+        normalised.append(result)
 
-    scoring = (
-        scoring
-        .dropna(
-            subset=[
+    if not normalised:
+        return pd.DataFrame(
+            columns=[
                 "_game_id",
+                "_actual_home_score",
+                "_actual_away_score",
+                "_result_source",
             ]
         )
-        .drop_duplicates(
-            subset=[
-                "_game_id",
-            ],
-            keep="last",
-        )
-    )
 
-    return scoring
+    return (
+        pd.concat(normalised, ignore_index=True, sort=False)
+        .dropna(subset=["_game_id"])
+        .drop_duplicates(subset=["_game_id"], keep="last")
+        .reset_index(drop=True)
+    )
 
 
 def select_market_for_game(
@@ -430,6 +597,24 @@ def legacy_rows_from_existing_output(
     if old.empty:
         return old
 
+    # A row selected under an obsolete betting rule must never leak into the
+    # current public record.  Preserve only rows already produced by the exact
+    # active rules when their source game cannot currently be reconstructed.
+    if "selection_rule" not in old.columns:
+        return pd.DataFrame()
+
+    old = old[
+        old["selection_rule"].isin(
+            [
+                MONEYLINE_SELECTION_RULE,
+                ATS_SELECTION_RULE,
+            ]
+        )
+    ].copy()
+
+    if old.empty:
+        return old
+
     old_id_col = game_id_column(
         old
     )
@@ -474,7 +659,7 @@ def main() -> None:
 
     print("=" * 78)
     print(
-        "CFB PREDICTION CENTRE 2026 V2 "
+        "CFB PREDICTION CENTRE 2026 "
         "- BUILD BETTING PERFORMANCE"
     )
     print("=" * 78)
@@ -483,19 +668,21 @@ def main() -> None:
     # REQUIRED FILES
     # --------------------------------------------------------
 
-    if not V2_GAMES.exists():
+    games_path = V3_GAMES if V3_GAMES.exists() else V2_GAMES
+
+    if not games_path.exists():
 
         raise FileNotFoundError(
-            f"Missing app game data:\n{V2_GAMES}\n\n"
+            f"Missing app game data:\n{games_path}\n\n"
             "Run: python -m jobs.build_app_data"
         )
 
     # --------------------------------------------------------
-    # LOAD V2 APP GAMES
+    # LOAD THE RICHEST APP GAME SCHEMA AVAILABLE
     # --------------------------------------------------------
 
     games = pd.read_csv(
-        V2_GAMES,
+        games_path,
         low_memory=False,
     )
 
@@ -554,22 +741,27 @@ def main() -> None:
     market = load_market_history()
 
     print(
-        f"V2 app games:          "
+        f"App games:             "
         f"{len(games):,}"
     )
 
     print(
-        f"V2 scoring rows:       "
+        f"App game source:       "
+        f"{games_path}"
+    )
+
+    print(
+        f"Result source rows:    "
         f"{len(scoring):,}"
     )
 
     print(
-        f"Completed V2 results:  "
+        f"Completed results:     "
         f"{len(completed_scoring):,}"
     )
 
     print(
-        f"V2 market history:     "
+        f"Market history rows:   "
         f"{len(market):,}"
     )
 
@@ -583,7 +775,7 @@ def main() -> None:
         print()
 
         print(
-            "No V2 market data exists yet."
+            "No market data exists yet."
         )
 
         print(
@@ -730,6 +922,11 @@ def main() -> None:
 
             continue
 
+        model_confidence = model_confidence_for_pick(
+            game,
+            model_home=model_home,
+        )
+
         game_market = (
             market[
                 market[
@@ -752,6 +949,13 @@ def main() -> None:
             continue
 
         matched_market_count += 1
+
+        # This game has now been evaluated using the current rules.  Mark it
+        # rebuilt even when neither bet qualifies so an old legacy row cannot
+        # survive after the eligibility rules change.
+        rebuilt_game_ids.add(
+            game_id
+        )
 
         if home_score > away_score:
 
@@ -824,6 +1028,12 @@ def main() -> None:
             "predicted_winner": (
                 predicted_winner
             ),
+            "model_confidence": (
+                model_confidence
+            ),
+            "winner_confidence": (
+                model_confidence
+            ),
             "final_away_score": (
                 away_score
             ),
@@ -874,7 +1084,13 @@ def main() -> None:
             ml_odds = away_ml
             bet_team = away_team
 
-        if ml_odds is not None:
+        if (
+            ml_odds is not None
+            and ml_odds >= MONEYLINE_MIN_AMERICAN_ODDS
+            and ml_odds <= MONEYLINE_MAX_AMERICAN_ODDS
+            and model_confidence is not None
+            and model_confidence >= MONEYLINE_MIN_MODEL_CONFIDENCE
+        ):
 
             if actual_winner == "Tie":
 
@@ -931,11 +1147,10 @@ def main() -> None:
                     "profit_loss": (
                         profit_loss
                     ),
+                    "selection_rule": (
+                        MONEYLINE_SELECTION_RULE
+                    ),
                 }
-            )
-
-            rebuilt_game_ids.add(
-                game_id
             )
 
         # ====================================================
@@ -948,7 +1163,18 @@ def main() -> None:
             )
         )
 
-        if spread is not None:
+        ats = (
+            ats_projection(game, spread)
+            if spread is not None
+            else None
+        )
+
+        if (
+            spread is not None
+            and ats is not None
+            and float(ats["cover_probability"])
+            >= ATS_MIN_COVER_PROBABILITY
+        ):
 
             # CFBD's existing convention in this project:
             #
@@ -965,7 +1191,7 @@ def main() -> None:
                 + spread
             )
 
-            if model_home:
+            if bool(ats["bet_home"]):
 
                 bet_team = (
                     home_team
@@ -1022,6 +1248,21 @@ def main() -> None:
             rows.append(
                 {
                     **base,
+                    "model_confidence": float(
+                        ats["cover_probability"]
+                    ),
+                    "winner_confidence": model_confidence,
+                    "ats_cover_probability": float(
+                        ats["cover_probability"]
+                    ),
+                    "ats_home_cover_probability": float(
+                        ats["home_cover_probability"]
+                    ),
+                    "ats_projected_home_margin": float(
+                        ats["projected_home_margin"]
+                    ),
+                    "ats_margin_sd": float(ats["margin_sd"]),
+                    "ats_edge_points": float(ats["edge_points"]),
                     "bet_type": (
                         "Spread"
                     ),
@@ -1043,11 +1284,10 @@ def main() -> None:
                     "profit_loss": (
                         profit_loss
                     ),
+                    "selection_rule": (
+                        ATS_SELECTION_RULE
+                    ),
                 }
-            )
-
-            rebuilt_game_ids.add(
-                game_id
             )
 
     output = pd.DataFrame(
@@ -1086,6 +1326,13 @@ def main() -> None:
         "away_team",
         "home_team",
         "predicted_winner",
+        "winner_confidence",
+        "model_confidence",
+        "ats_cover_probability",
+        "ats_home_cover_probability",
+        "ats_projected_home_margin",
+        "ats_margin_sd",
+        "ats_edge_points",
         "final_away_score",
         "final_home_score",
         "source_type",
@@ -1099,6 +1346,7 @@ def main() -> None:
         "stake",
         "result",
         "profit_loss",
+        "selection_rule",
         "bet_number",
         "cumulative_profit_loss",
     ]
@@ -1238,13 +1486,23 @@ def main() -> None:
     print()
 
     print(
-        f"Completed V2 games:     "
+        f"Completed app games:    "
         f"{completed_count:,}"
     )
 
     print(
-        f"Games with V2 market:   "
+        f"Games with market:      "
         f"{matched_market_count:,}"
+    )
+
+    print(
+        "Moneyline rule:         "
+        "odds -350 to +350 and win probability >= 60%"
+    )
+
+    print(
+        "ATS rule:               "
+        "simulated cover probability >= 55%"
     )
 
     print()
@@ -1355,6 +1613,33 @@ def main() -> None:
     print(
         "-" * 78
     )
+
+    if not output.empty:
+
+        print()
+        print("Eligible tracked bets by week:")
+
+        weekly = (
+            output
+            .groupby(
+                [
+                    "week",
+                    "bet_type",
+                ],
+                dropna=False,
+            )
+            .size()
+            .unstack(
+                fill_value=0,
+            )
+            .sort_index()
+        )
+
+        print(
+            weekly.to_string()
+        )
+
+        print()
 
     if output.empty:
 

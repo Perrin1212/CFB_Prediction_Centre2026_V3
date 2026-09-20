@@ -1330,11 +1330,13 @@ def main():
             )
 
             hs = engine.snapshot(
-                r.home_team
+                r.home_team,
+                getattr(r, "home_classification", None),
             )
 
             as_ = engine.snapshot(
-                r.away_team
+                r.away_team,
+                getattr(r, "away_classification", None),
             )
 
             m = build_matchup(

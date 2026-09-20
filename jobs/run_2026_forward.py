@@ -335,6 +335,7 @@ def build_frozen_elo_config() -> EloConfig:
 
     return EloConfig(
         starting_rating=1500.0,
+        fcs_starting_rating=1100.0,
         home_field_advantage=75.0,
         k_factor=30.0,
         preseason_regression=0.45,
@@ -1161,11 +1162,13 @@ def predict_one_game(
     # ========================================================
 
     home_elo = elo_engine.get_rating(
-        home_team
+        home_team,
+        game_row.get("home_classification"),
     )
 
     away_elo = elo_engine.get_rating(
-        away_team
+        away_team,
+        game_row.get("away_classification"),
     )
 
     elo_probability = (
